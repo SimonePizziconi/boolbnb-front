@@ -1,13 +1,11 @@
 <script>
 import Logo from './Logo.vue';
-import SearchBar from './SearchBar.vue';
 import { ref } from 'vue';
 
 export default {
-  name: 'Navbar',
+  name: 'Footer',
   components: {
     Logo,
-    SearchBar
   },
   setup() {
     const menuOpen = ref(false);
@@ -20,15 +18,9 @@ export default {
 </script>
 
 <template>
-    <nav class="bg-gray-800 text-white fixed w-full z-10 top-0 left-0">
+    <nav class="bg-gray-800 text-white fixed w-full z-10 bottom-0 left-0">
       <div class="container mx-auto px-4 py-2 flex justify-between items-center">
-        <!-- Logo -->
-        <Logo />
-
-        <!-- SearchBar -->
-        <SearchBar />
-
-        <!-- Link -->
+        
         <div class="hidden md:flex space-x-4">
           <!-- <RouterLink to="/" class="hover:bg-gray-700 px-3 py-2 rounded">
             Home
@@ -37,7 +29,7 @@ export default {
             Login
           </RouterLink>
           <RouterLink to="/register" class="hover:bg-gray-700 px-3 py-2 rounded">
-            Registrati
+            Register
           </RouterLink>
           <!-- <RouterLink to="/contacts" class="hover:bg-gray-700 px-3 py-2 rounded">
             Contacts
@@ -63,7 +55,6 @@ export default {
 
   
   <style scoped lang="scss">
-  
-
+  /* Puoi aggiungere ulteriore stile se necessario */
   </style>
   
