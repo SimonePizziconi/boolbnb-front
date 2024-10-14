@@ -30,18 +30,8 @@ export default {
 
         <!-- Link -->
         <div class="hidden md:flex space-x-4">
-          <!-- <RouterLink to="/" class="hover:bg-gray-700 px-3 py-2 rounded">
-            Home
-          </RouterLink> -->
-          <RouterLink to="/login" class="hover:bg-gray-700 px-3 py-2 rounded">
-            Login
-          </RouterLink>
-          <RouterLink to="/register" class="hover:bg-gray-700 px-3 py-2 rounded">
-            Registrati
-          </RouterLink>
-          <!-- <RouterLink to="/contacts" class="hover:bg-gray-700 px-3 py-2 rounded">
-            Contacts
-          </RouterLink> -->
+          <a href="#">Login</a>
+          <a href="#">Registrati</a>
         </div>
         <div class="md:hidden">
           <button @click="toggleMenu" class="focus:outline-none">
