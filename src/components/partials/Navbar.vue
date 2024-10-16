@@ -30,8 +30,8 @@ export default {
 
         <!-- Link -->
         <div class="hidden md:flex space-x-4">
-          <a href="#">Login</a>
-          <a href="#">Registrati</a>
+          <a href="http://127.0.0.1:8000/login">Login</a>
+          <a href="http://127.0.0.1:8000/register">Registrati</a>
         </div>
         <div class="md:hidden">
           <button @click="toggleMenu" class="focus:outline-none">

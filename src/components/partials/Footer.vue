@@ -16,6 +16,7 @@ export default {
 
       <a href="#" class="m-4">Login</a>
       <a href="#" class="m-4">Registrati</a>
+
       
     </div>
   </template>
