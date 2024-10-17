@@ -41,10 +41,10 @@ export default {
           </button>
         </div>
       </div>
-      <div v-if="menuOpen" class="md:hidden">
+      <div v-if="menuOpen" class="md:hidden flex flex-col m-1">
         <!-- <RouterLink to="/" class="block hover:bg-gray-700 px-3 py-2">Home</RouterLink> -->
-        <RouterLink to="/portfolio" class="block hover:bg-gray-700 px-3 py-2">Login</RouterLink>
-        <RouterLink to="/about" class="block hover:bg-gray-700 px-3 py-2">Register</RouterLink>
+          <a href="http://127.0.0.1:8000/login">Login</a>
+          <a href="http://127.0.0.1:8000/register">Registrati</a>
         <!-- <RouterLink to="/contacts" class="block hover:bg-gray-700 px-3 py-2">Contacts</RouterLink> -->
       </div>
     </nav>

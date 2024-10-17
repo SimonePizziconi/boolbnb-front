@@ -14,8 +14,10 @@ export default {
 <template>
     <div class="bg-gray-800 text-white fixed w-full z-10 bottom-0 left-0">
 
-      <a href="#" class="m-4">Login</a>
-      <a href="#" class="m-4">Registrati</a>
+      <div class="hidden md:flex space-x-4">
+          <a href="http://127.0.0.1:8000/login">Login</a>
+          <a href="http://127.0.0.1:8000/register">Registrati</a>
+      </div>
 
       
     </div>
