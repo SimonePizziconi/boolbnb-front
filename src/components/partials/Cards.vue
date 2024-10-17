@@ -1,4 +1,9 @@
 <script>
+  export default {
+  
+    Cards, 
+    
+  };
 
 </script>
 
@@ -19,6 +24,3 @@
     </div>
   </template>
 
-<style scoped lang="scss">
-
-</style>

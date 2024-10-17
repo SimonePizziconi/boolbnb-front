@@ -1,4 +1,6 @@
 <script>
+    // import Cards from '../components/partials/Cards.vue';
+    // import Detail from '../components/partials/Detail.vue';
     export default {
         name: 'home',
         data() {
@@ -49,6 +51,7 @@
           }
         },
     }
+    
 </script>
 
 <template>
@@ -60,6 +63,7 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             <!-- <div class="square bg-blue-500 rounded sm:bg-red-500 md:bg-green-500 lg:bg-blue-300" ></div> -->
+            
             <div v-for="appartamento in appartamenti" :key="appartamento.title" class="square bg-blue-500 rounded-md sm:bg-red-500 md:bg-green-500 lg:bg-blue-300" >
               <img :src="appartamento.image_url" :alt="appartamento.title" class="w-fill h-full rounded object-cover">
             </div>
@@ -68,7 +72,11 @@
             
             
         </div>
+
+        
+        
     </div>
+    
 </template>
 
 <style scoped lang="scss">
