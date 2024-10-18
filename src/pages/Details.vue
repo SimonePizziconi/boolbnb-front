@@ -65,7 +65,7 @@
                 'Servizio di Pulizia': 'broom',
                 'Reception 24 Ore': 'clock',
                 'Cassaforte': 'lock',
-                'Frigorifero': 'icicles',
+                'Frigorifero': 'carrot',
                 'Mini Bar': 'wine-glass-alt',
                 'Servizio Lavanderia': 'tshirt',
                 'Cambio Biancheria': 'bed',
@@ -103,7 +103,7 @@
 
         <div class="grid gap-8 grid-cols-1 gap-y-6 sm:mt-10 sm:gap-y-0 lg:grid-cols-2"> 
 
-            <div class="rounded-md mt-10 bg-gray-200 p-4">
+            <div class="rounded-md mt-10 bg-gray-200 p-4 h-fit">
 
                 <!-- info appartemento -->
                 <div>
@@ -113,12 +113,12 @@
                     <span class="block"><i class="fa-solid fa-toilet-paper"></i> Numero di bagni - {{ apartment.bathrooms }}</span>
                 </div>
 
-                <!-- servizi appartamento -->
                 <div class="border-t-2 border-secondary">
-                    <h4 class="font-bold ms-2 mt-2">Servizi</h4>
-                    <div class="flex flex-col flex-wrap h-96">
+                    <h4 class="font-bold ms-2">Servizi</h4>
+
+                    <div class="flex flex-col flex-wrap h-fit max-h-96">
                         <div class="ms-2 mb-2" v-for="service in apartment.services">
-                            {{ service.name }}
+                            <i :class="`fas fa-${getServiceIcon(service.name)}`" class="text-lg"></i>    {{ service.name }} 
                         </div>
                     </div>
                 </div>
