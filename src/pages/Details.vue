@@ -67,8 +67,11 @@
                 </div>
 
                 <!-- servizi appartamento -->
-                <div>
-                    {{ apartment.services }}
+                <div class="">
+                    <h4 class="font-bold ms-2">Servizi</h4>
+                    <div class="ms-2 mb-2" v-for="service in apartment.services">
+                        {{ service.name }}
+                    </div>
                 </div>
 
             </div>
