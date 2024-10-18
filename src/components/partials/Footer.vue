@@ -32,8 +32,7 @@ export default {
         <a href="#">-</a>
         <a href="#">€ EUR</a>
         <a href="#">-</a>
-        
-        <font-awesome-icon icon="fa-brands fa-instagram" class="h-4 w-4"/>
+        <font-awesome-icon icon="fa-brands fa-instagram"/>
         
       </div>
 
