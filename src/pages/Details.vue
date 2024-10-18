@@ -117,7 +117,7 @@
                 <div class="">
                     <h4 class="font-bold ms-2">Servizi</h4>
                     <div class="ms-2 mb-2" v-for="service in apartment.services">
-                        {{ service.name }}
+                        <i :class="`fas fa-${getServiceIcon(service.name)}`" class="text-lg"></i>    {{ service.name }} 
                     </div>
                 </div>
 
