@@ -86,7 +86,7 @@
       }" class="my-swiper">
       <!-- Cicliamo gli appartamenti per ogni slide -->
       <swiper-slide v-for="apartment in apartments" :key="apartment.id">
-        <a href="#" class="card">
+        <router-link :to="{name:'details', params:{slug: apartment.slug}}" class="card">
           <img 
             :src="apartment.image_path" 
             :alt="apartment.title" 
@@ -94,7 +94,7 @@
           >
           <!-- Dettagli dell'appartamento -->
           <h3 class="text-center mt-2">{{ apartment.title }}</h3>
-        </a>
+        </router-link>
       </swiper-slide>
     </swiper>
   </div>
