@@ -48,20 +48,20 @@ import ContactForm from '@/components/ContactForm.vue';
             <img class="rounded-md h-full w-full object-cover" :src="apartment.image_path" :alt="apartment.title">
         </div>
 
-        <div class="flex">
+        <div class="grid gap-8 grid-cols-1 gap-y-6 sm:mt-10 sm:gap-y-0 lg:grid-cols-2"> 
 
-            <div class="rounded-md flex-1 w-2/10 h-96 mt-10 bg-gray-200 text-center lg:basis-2/5 sm:basis-full"> 
+            <div class="rounded-md h-96 mt-10 bg-gray-200 text-center"> 
                 <h6>{{ apartment.title }}</h6>
                 <span>{{ apartment.rooms }} Stanze - {{ apartment.beds }} Letti - {{ apartment.bathrooms }} Bagni - {{ apartment.square_meters }} M2 </span>
             </div>
 
-            <div class="rounded-md flex-1 mt-10 ms-2 bg-gray-200 text-center lg:basis-2/5 sm:basis-full"> 
+            <div class="rounded-md mt-10 bg-gray-200 text-center"> 
                 <ContactForm></ContactForm>
             </div>
 
         </div>
 
-        <div class="rounded-md flex-1 w-2/10 h-96 mt-10 bg-gray-200 text-center"> 
+        <div class="rounded-md flex-1 w-2/10 h-96 mt-10 bg-gray-200 text-center mt-20"> 
             <h2>Mappa</h2>
         </div>
 
