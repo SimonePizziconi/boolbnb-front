@@ -56,7 +56,7 @@
 
         <div class="grid gap-8 grid-cols-1 gap-y-6 sm:mt-10 sm:gap-y-0 lg:grid-cols-2"> 
 
-            <div class="rounded-md h-96 mt-10 bg-gray-200 p-4">
+            <div class="rounded-md mt-10 bg-gray-200 p-4">
 
                 <!-- info appartemento -->
                 <div>
@@ -67,10 +67,12 @@
                 </div>
 
                 <!-- servizi appartamento -->
-                <div class="">
-                    <h4 class="font-bold ms-2">Servizi</h4>
-                    <div class="ms-2 mb-2" v-for="service in apartment.services">
-                        {{ service.name }}
+                <div class="border-t-2 border-secondary">
+                    <h4 class="font-bold ms-2 mt-2">Servizi</h4>
+                    <div class="flex flex-col flex-wrap h-96">
+                        <div class="ms-2 mb-2" v-for="service in apartment.services">
+                            {{ service.name }}
+                        </div>
                     </div>
                 </div>
 
