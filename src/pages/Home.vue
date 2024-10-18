@@ -5,17 +5,20 @@
     import 'swiper/swiper-bundle.css';
     import 'swiper/css';
     import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+    import Loader from '@/components/Loader.vue';
 
     export default {
         name: 'home',
         components: {
           Swiper,
           SwiperSlide,
+          Loader,
         },
         data() {
           return {
             store,
-            apartments: [] 
+            apartments: [],
+            loading:true,
           };
         },
         methods: {
@@ -24,6 +27,7 @@
                     .then(res => {
                         this.apartments = res.data.apartments;
                         console.log(res.data.apartments);
+                        this.loading = false;
                     })
                     .catch(error => {
                         console.error("Errore nel caricamento degli appartamenti: ", error);
@@ -42,65 +46,79 @@
 </script>
 
 <template>
-  <h1 class="p-4 text-secondary text-center">
-    Benvenuto nella HomePage di BoolBnb!
-  </h1>
-    
-  <div class="container m-auto text">
-    <!-- Swiper con 4 slide visibili per volta con loop infinito e blocco sull'hover -->
-    <h1 class="text-secondary">Appartamenti in evidenza</h1>
-    <swiper :autoplay="{delay : 5000, disableOnInteraction : false, pauseOnMouseEnter: true}" 
-      :modules="modules" 
-      :slides-per-view="4" space-between="20" loop="true"  
-      :breakpoints="{
-      640: { slidesPerView: 1 },
-      768: { slidesPerView: 2 },
-      1024: { slidesPerView: 3 },
-      1280: { slidesPerView: 4 }
-      }" class="my-swiper">
-      <!-- Cicliamo gli appartamenti per ogni slide -->
-      <swiper-slide v-for="apartment in apartments" :key="apartment.id">
-        <router-link :to="{name:'details', params:{slug: apartment.slug}}" class="card">
-          <div class="ribbon">Nuovo</div>
-          <img 
-            :src="apartment.image_path" 
-            :alt="apartment.title" 
-            class="w-full h-full rounded object-cover"
-          >
-          <!-- Dettagli dell'appartamento -->
-          <h3 class="text-center mt-2">{{ apartment.title }}</h3>
-        </router-link>
-      </swiper-slide>
-    </swiper>
-
-    <!-- Swiper con 4 slide visibili per volta e navigazione con loop infinito e blocco sull'hover -->
-    <h1>Appartamenti non in evidenza</h1>
-    <swiper :autoplay="{delay : 5000, disableOnInteraction : false, pauseOnMouseEnter: true}" 
-      :modules="modules" 
-      :slides-per-view="4" space-between="20" loop="true" 
-      :breakpoints="{
-      640: { slidesPerView: 1 },
-      768: { slidesPerView: 2 },
-      1024: { slidesPerView: 3 },
-      1280: { slidesPerView: 4 }
-      }" class="my-swiper">
-      <!-- Cicliamo gli appartamenti per ogni slide -->
-      <swiper-slide v-for="apartment in apartments" :key="apartment.id">
-        <a href="#" class="card">
-          <img 
-            :src="apartment.image_path" 
-            :alt="apartment.title" 
-            class="w-full h-full rounded object-cover"
-          >
-          <!-- Dettagli dell'appartamento -->
-          <h3 class="text-center mt-2">{{ apartment.title }}</h3>
-        </a>
-      </swiper-slide>
-    </swiper>
+  <div class="loader-container" v-if="this.loading">
+    <Loader></Loader>
   </div>
+
+  <div v-else>
+    <h1 class="p-4 text-secondary text-center">
+      Benvenuto nella HomePage di BoolBnb!
+    </h1>
+      
+    <div class="container m-auto text">
+      <!-- Swiper con 4 slide visibili per volta con loop infinito e blocco sull'hover -->
+      <h1 class="text-secondary">Appartamenti in evidenza</h1>
+      <swiper :autoplay="{delay : 5000, disableOnInteraction : false, pauseOnMouseEnter: true}" 
+        :modules="modules" 
+        :slides-per-view="4" space-between="20" loop="true"  
+        :breakpoints="{
+        640: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+        1280: { slidesPerView: 4 }
+        }" class="my-swiper">
+        <!-- Cicliamo gli appartamenti per ogni slide -->
+        <swiper-slide v-for="apartment in apartments" :key="apartment.id">
+          <router-link :to="{name:'details', params:{slug: apartment.slug}}" class="card">
+            <div class="ribbon">Nuovo</div>
+            <img 
+              :src="apartment.image_path" 
+              :alt="apartment.title" 
+              class="w-full h-full rounded object-cover"
+            >
+            <!-- Dettagli dell'appartamento -->
+            <h3 class="text-center mt-2">{{ apartment.title }}</h3>
+          </router-link>
+        </swiper-slide>
+      </swiper>
+
+      <!-- Swiper con 4 slide visibili per volta e navigazione con loop infinito e blocco sull'hover -->
+      <h1>Appartamenti non in evidenza</h1>
+      <swiper :autoplay="{delay : 5000, disableOnInteraction : false, pauseOnMouseEnter: true}" 
+        :modules="modules" 
+        :slides-per-view="4" space-between="20" loop="true" 
+        :breakpoints="{
+        640: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+        1280: { slidesPerView: 4 }
+        }" class="my-swiper">
+        <!-- Cicliamo gli appartamenti per ogni slide -->
+        <swiper-slide v-for="apartment in apartments" :key="apartment.id">
+          <a href="#" class="card">
+            <img 
+              :src="apartment.image_path" 
+              :alt="apartment.title" 
+              class="w-full h-full rounded object-cover"
+            >
+            <!-- Dettagli dell'appartamento -->
+            <h3 class="text-center mt-2">{{ apartment.title }}</h3>
+          </a>
+        </swiper-slide>
+      </swiper>
+    </div>
+  </div>
+
 </template>
 
 <style scoped lang="scss">
+
+ .loader-container{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
 .container {
   margin-top: 5%;

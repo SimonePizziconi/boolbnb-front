@@ -1,20 +1,23 @@
 <script>
     import axios from 'axios';
     import { store } from '../store/store.js';
-import ContactForm from '@/components/ContactForm.vue';
+    import ContactForm from '@/components/ContactForm.vue';
+    import Loader from '@/components/Loader.vue';
 
     export default {
         name: 'Details',
 
         components:{
-            ContactForm
+            ContactForm,
+            Loader,
         },
 
         data(){
             return {
                 store,
                 slug: '',
-                apartment: {}
+                apartment: {},
+                loading:true
             }
         },
         methods: {
@@ -23,10 +26,9 @@ import ContactForm from '@/components/ContactForm.vue';
                 .then(res => {
                     this.apartment = res.data.apartment;
                     console.log(this.apartment);
+                    this.loading = false;
                 })
-
                 //console.log(this.slug);
-                
             }
         },
         mounted(){
@@ -38,7 +40,11 @@ import ContactForm from '@/components/ContactForm.vue';
 
 <template>
 
-    <div class="container m-auto text">
+    <div class="loader-container" v-if="this.loading">
+        <Loader></Loader>
+    </div>
+
+    <div class="container m-auto text" v-else>
 
         <div class="mt-8 mb-8">
             <h1 class="mt-2x text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{ apartment.title }}</h1>
@@ -50,8 +56,8 @@ import ContactForm from '@/components/ContactForm.vue';
 
         <div class="grid gap-8 grid-cols-1 gap-y-6 sm:mt-10 sm:gap-y-0 lg:grid-cols-2"> 
 
-            <div class="rounded-md h-96 mt-10 bg-gray-200 text-center"> 
-                <h6>{{ apartment.title }}</h6>
+            <div class="rounded-md h-96 mt-10 bg-gray-200 p-4"> 
+                <h4 class="font-bold">Cosa troverai</h4>
                 <span>{{ apartment.rooms }} Stanze - {{ apartment.beds }} Letti - {{ apartment.bathrooms }} Bagni - {{ apartment.square_meters }} M2 </span>
             </div>
 
@@ -79,5 +85,13 @@ import ContactForm from '@/components/ContactForm.vue';
     width: 100%;
     height: 200px;
   }
+
+  .loader-container{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
 </style>
 
