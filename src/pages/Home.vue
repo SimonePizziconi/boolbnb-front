@@ -18,7 +18,7 @@
                 axios.get(store.apiUrl + 'apartments')
                     .then(res => {
                         this.apartments = res.data.apartments;
-                        console.log(res.data.apartments);
+                        // console.log(res.data.apartments);
                     })
             }
         },
