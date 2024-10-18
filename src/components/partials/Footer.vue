@@ -31,14 +31,14 @@ export default {
         </li>
       </ul>
 
-      <ul class="flex h-100 space-x-4 items-center">
+      <!-- <ul class="flex h-100 space-x-4 items-center">
         <li>
           <a href="#">Italiano (IT)</a>
         </li>
         <li>
           <a href="#">€ EUR</a>
         </li>
-      </ul>
+      </ul> -->
       <div class="flex hidden md:flex space-x-4 pr-4">
         <a href="#">Italiano (IT)</a>
         <a href="#">-</a>
