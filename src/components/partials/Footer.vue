@@ -14,9 +14,9 @@ export default {
 </script>
 
 <template>
-    <div class=" flex boolbnb-bg-black text-white fixed w-full z-10 bottom-0 left-0 h-10 justify-between">
+    <div class=" flex boolbnb-bg-black text-white fixed w-full z-10 bottom-0 left-0 justify-between">
 
-      <div class="hidden md:flex space-x-4 pl-4">
+      <div class="flex h-100 space-x-4 pl-4 align-middle">
         
         <a href="#">© 2024 BoolBnB, Inc.</a>
         <a href="#">-</a>
@@ -44,7 +44,8 @@ export default {
   
   <style scoped lang="scss">
   .boolbnb-bg-black{
-    background-color:rgb(28, 28, 28)
+    background-color:rgb(28, 28, 28);
+    height: 50px;
   }
   font-awesome-icon{
     color: white;

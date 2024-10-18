@@ -49,7 +49,7 @@
   <div class="loader-container" v-if="this.loading">
     <Loader></Loader>
   </div>
-
+  
   <div v-else>
     <h1 class="p-4 text-secondary text-center">
       Benvenuto nella HomePage di BoolBnb!
@@ -95,7 +95,7 @@
         }" class="my-swiper">
         <!-- Cicliamo gli appartamenti per ogni slide -->
         <swiper-slide v-for="apartment in apartments" :key="apartment.id">
-          <a href="#" class="card">
+          <router-link :to="{name:'details', params:{slug: apartment.slug}}" class="card">
             <img 
               :src="apartment.image_path" 
               :alt="apartment.title" 
@@ -103,12 +103,13 @@
             >
             <!-- Dettagli dell'appartamento -->
             <h3 class="text-center mt-2">{{ apartment.title }}</h3>
-          </a>
+          </router-link>
         </swiper-slide>
       </swiper>
     </div>
   </div>
 
+  
 </template>
 
 <style scoped lang="scss">
