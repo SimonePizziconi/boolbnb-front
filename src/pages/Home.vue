@@ -69,7 +69,7 @@
         }" class="my-swiper">
         <!-- Cicliamo gli appartamenti per ogni slide -->
         <swiper-slide v-for="apartment in apartments" :key="apartment.id">
-          <router-link :to="{name:'details', params:{slug: apartment.slug}}" class="card">
+          <router-link :to="{name:'details', params:{slug: apartment.slug}}" class="card gap-1 mt-5 flex flex-col justify-center items-center text-center relative">
             <div class="ribbon">Nuovo</div>
             <img 
               :src="apartment.image_path" 
@@ -95,7 +95,7 @@
         }" class="my-swiper">
         <!-- Cicliamo gli appartamenti per ogni slide -->
         <swiper-slide v-for="apartment in apartments" :key="apartment.id">
-          <router-link :to="{name:'details', params:{slug: apartment.slug}}" class="card">
+          <router-link :to="{name:'details', params:{slug: apartment.slug}}" class="card gap-1 mt-5 flex flex-col justify-center items-center text-center relative">
             <img 
               :src="apartment.image_path" 
               :alt="apartment.title" 
@@ -127,13 +127,6 @@
 
   .card {
     aspect-ratio: 1 / 1;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: relative; 
 
     img {
       max-width: 100%;

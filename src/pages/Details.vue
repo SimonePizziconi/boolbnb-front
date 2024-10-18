@@ -29,6 +29,53 @@
                     this.loading = false;
                 })
                 //console.log(this.slug);
+            },
+            getServiceIcon(serviceName) {
+            const icons = {
+                'WiFi': 'wifi',
+                'Posto Macchina': 'parking',
+                'Piscina': 'swimmer',
+                'Portineria': 'concierge-bell',
+                'Sauna': 'hot-tub',
+                'Vista Mare': 'water',
+                'Aria Condizionata': 'snowflake',
+                'Riscaldamento': 'temperature-high',
+                'TV via Cavo': 'tv',
+                'Cucina Completa': 'utensils',
+                'Lavastoviglie': 'sink',
+                'Lavatrice': 'tshirt',
+                'Asciugatrice': 'wind',
+                'Balcone': 'building',
+                'Giardino Privato': 'leaf',
+                'Barbecue': 'fire',
+                'Vasca Idromassaggio': 'hot-tub',
+                'Camino': 'fire',
+                'Accesso Disabili': 'wheelchair',
+                'Animali Ammessi': 'paw',
+                'Palestra': 'dumbbell',
+                'Spa': 'spa',
+                'Servizio in Camera': 'concierge-bell',
+                'Colazione Inclusa': 'coffee',
+                'Ristorante in Loco': 'utensils',
+                'Navetta Aeroporto': 'shuttle-van',
+                'Parco Giochi': 'child',
+                'Deposito Bagagli': 'suitcase-rolling',
+                'Parcheggio Bici': 'bicycle',
+                'Noleggio Auto': 'car',
+                'Servizio di Pulizia': 'broom',
+                'Reception 24 Ore': 'clock',
+                'Cassaforte': 'lock',
+                'Frigorifero': 'icicles',
+                'Mini Bar': 'wine-glass-alt',
+                'Servizio Lavanderia': 'tshirt',
+                'Cambio Biancheria': 'bed',
+                'Vista Montagna': 'mountain',
+                'Vicino alla Spiaggia': 'umbrella-beach',
+                'Accesso alla Pista Ciclabile': 'bicycle'
+            };
+
+            // Restituisci l'icona corrispondente o una di default (es. 'question' per icone sconosciute)
+            return icons[serviceName] || 'question';
             }
         },
         mounted(){
