@@ -102,7 +102,7 @@
             <img class="h-full w-full object-cover object-center transition-property:all hover:scale-105 duration-1000" :src="apartment.image_path" :alt="apartment.title">
         </div>
 
-        <div class="grid gap-8 grid-cols-1 gap-y-6 sm:mt-10 sm:gap-y-0 lg:grid-cols-3"> 
+        <div class="grid lg:gap-8 grid-cols-1 gap-y-6 sm:mt-10 sm:gap-y-0 sm:gap-y-0 lg:grid-cols-3"> 
 
             <div class="rounded-md mt-10 bg-gray-100 p-4 h-fit col-span-2 shadow-lg border border-neutral">
 
