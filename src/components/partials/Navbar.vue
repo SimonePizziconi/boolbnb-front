@@ -20,7 +20,7 @@ export default {
 </script>
 
 <template>
-    <nav class="bg-gray-800 text-white fixed w-full z-10 top-0 left-0">
+    <nav class="boolbnb-bg-black text-white fixed w-full z-10 top-0 left-0">
       <div class="container mx-auto px-4 py-2 flex justify-between items-center">
         <!-- Logo -->
         <Logo />
@@ -54,6 +54,8 @@ export default {
   
   <style scoped lang="scss">
   
-
+  .boolbnb-bg-black{
+    background-color:rgb(28, 28, 28)
+  }
   </style>
   
