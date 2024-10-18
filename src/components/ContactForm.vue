@@ -8,7 +8,7 @@
 
 <template>
 
-    <div class="isolate px-6 py-24 sm:py-32 lg:px-8">
+    <div class="isolate py-8 px-8 shadow-lg rounded-md border border-primay">
 
         <div class="mx-auto max-w-2xl text-center">
             <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Contatta il proprietario</h2>
