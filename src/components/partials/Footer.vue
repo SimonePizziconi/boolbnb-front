@@ -39,6 +39,17 @@ export default {
           <a href="#">€ EUR</a>
         </li>
       </ul>
+      <div class="flex hidden md:flex space-x-4 pr-4">
+        <a href="#">Italiano (IT)</a>
+        <a href="#">-</a>
+        <a href="#">€ EUR</a>
+        <a href="#">-</a>
+        <a href="#"><i class="fa-brands fa-instagram pt-1"></i></a>
+        <a href="#"><i class="fa-brands fa-facebook pt-1"></i></a>
+        <a href="#"><i class="fa-brands fa-x-twitter pt-1"></i></a>
+      </div>
+
+      
     </div>
   </template>
   
@@ -52,6 +63,10 @@ export default {
   font-awesome-icon{
     color: white;
     
+  }
+
+  .fa-brands{
+    font-size: 15px;
   }
   </style>
   

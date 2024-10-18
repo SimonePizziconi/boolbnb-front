@@ -103,9 +103,24 @@
 
         <div class="grid gap-8 grid-cols-1 gap-y-6 sm:mt-10 sm:gap-y-0 lg:grid-cols-2"> 
 
-            <div class="rounded-md h-96 mt-10 bg-gray-200 p-4"> 
-                <h4 class="font-bold">Cosa troverai</h4>
-                <span>{{ apartment.rooms }} Stanze - {{ apartment.beds }} Letti - {{ apartment.bathrooms }} Bagni - {{ apartment.square_meters }} M2 </span>
+            <div class="rounded-md h-96 mt-10 bg-gray-200 p-4">
+
+                <!-- info appartemento -->
+                <div>
+                    <h4 class="font-bold ms-2">Cosa troverai</h4>
+                    <span class="block"><i class="fa-solid fa-house-chimney"></i> Numero di stanze - {{ apartment.rooms }}</span>
+                    <span class="block"><i class="fa-solid fa-bed"></i> Numero di letti - {{ apartment.beds }}</span>
+                    <span class="block"><i class="fa-solid fa-toilet-paper"></i> Numero di bagni - {{ apartment.bathrooms }}</span>
+                </div>
+
+                <!-- servizi appartamento -->
+                <div class="">
+                    <h4 class="font-bold ms-2">Servizi</h4>
+                    <div class="ms-2 mb-2" v-for="service in apartment.services">
+                        {{ service.name }}
+                    </div>
+                </div>
+
             </div>
 
             <div class="rounded-md mt-10 bg-gray-200 text-center"> 
@@ -140,5 +155,11 @@
     align-items: center;
   }
 
+  div{
+    span.block{
+        padding: 0.5em;
+        font-size: 18px;
+    }
+  }
 </style>
 
