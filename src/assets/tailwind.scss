@@ -25,3 +25,7 @@ h5 {
 h6 {
     @apply text-base; // Applica una dimensione specifica per H6
 }
+
+body {
+    @apply bg-neutral; /* Aggiungi Tailwind per il body */
+  }

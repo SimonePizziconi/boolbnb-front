@@ -20,9 +20,12 @@ module.exports = {
     extend: {
       // Estendi la palette dei colori per includere colori personalizzati
       colors: {
-        primary: '#1a73e8',    // Colore primario personalizzato
-        secondary: '#ff5722',  // Colore secondario personalizzato
-        accent: '#9c27b0',     // Colore di accento personalizzato
+        primary: '#292929',    // Colore primario personalizzato
+        secondary: '#006D77',  // Colore secondario personalizzato
+        accent: '#556B2F',     // Colore di accento personalizzato
+        background: '#D9D9D9',
+        neutral: '#F0F0F0'
+        
       },
       // Aggiungi spaziature personalizzate per margini, padding, ecc.
       spacing: {
