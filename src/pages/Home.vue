@@ -39,16 +39,11 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             <!-- <div class="square bg-blue-500 rounded sm:bg-red-500 md:bg-green-500 lg:bg-blue-300" ></div> -->
             
-            <div v-for="apartment in apartments" :key="apartment.id" class="square">
+            <router-link v-for="apartment in apartments" :key="apartment.id" :to="{name:'details', params:{slug: apartment.slug}}" class="square">
               <img :src="apartment.image_path" :alt="apartment.title" class="w-fill h-full rounded object-cover">
-            </div>
-            
-            
-            
+            </router-link >
             
         </div>
-
-        
         
     </div>
     
