@@ -3,6 +3,7 @@ import Home from '../pages/Home.vue'
 import Register from '../pages/Register.vue'
 import Details from '../pages/Details.vue'
 import Login from '../pages/Login.vue'
+import Search from '../pages/Search.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +28,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: Search
     }
   ]
 })
