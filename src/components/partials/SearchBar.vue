@@ -29,9 +29,12 @@ export default {
         },
         selectLocation(result) {
             console.log('Posizione selezionata:', result);
-            alert(`Hai selezionato: ${result.address.freeformAddress}`);
             this.results = [];
             this.searchQuery = result.address.freeformAddress;
+        },
+        submitSearch() {
+            // Reindirizza alla pagina di ricerca con il parametro di ricerca
+            this.$router.push({ name: "search", query: { q: this.searchQuery } });
         },
     },
 };
@@ -39,7 +42,7 @@ export default {
 
 <template>
     <div class="relative w-full max-w-md">
-        <div class="flex space-x-2">
+        <form @submit.prevent="submitSearch" class="flex space-x-2">
             <input
                 type="text"
                 v-model="searchQuery"
@@ -48,12 +51,12 @@ export default {
                 class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 text-black"
             />
             <button
-                @click="searchLocation"
+                type="submit"
                 class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring"
             >
                 Cerca
             </button>
-        </div>
+        </form>
         <ul
             v-if="results.length"
             class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-48 overflow-y-auto"
