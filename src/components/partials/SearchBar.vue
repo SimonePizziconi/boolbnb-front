@@ -53,13 +53,13 @@ export default {
             <input
                 type="text"
                 v-model="searchQuery"
-                placeholder="Cerca una posizione..."
+                placeholder="Cerca una destinazione..."
                 @input="searchLocation"
-                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 text-black"
+                class="w-full p-2 border border-accent rounded-lg text-black focus:border-secondary  focus:outline-none"
             />
             <button
                 type="submit"
-                class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring"
+                class="px-4 py-2 bg-accent text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring"
             >
                 Cerca
             </button>

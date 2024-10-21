@@ -14,7 +14,7 @@ export default {
 </script>
 
 <template>
-    <div class="flex boolbnb-bg-black text-white fixed w-full z-10 bottom-0 left-0 justify-between p-4">
+    <div class="flex bg-primary text-white fixed w-full z-10 bottom-0 left-0 justify-between p-4 ">
 
       <ul class="flex h-100 space-x-4 items-center">
         <li>
