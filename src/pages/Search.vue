@@ -11,7 +11,7 @@ export default {
   },
   computed: {
     searchQuery() {
-      return this.$route.query.q || "";
+      return this.$route.query || "";
     },
   },
   methods: {
@@ -19,7 +19,8 @@ export default {
       // Effettua la chiamata API con il parametro di ricerca
       axios.get('http://localhost:8000/api/apartments/search', {
           params: {
-            q: this.searchQuery,
+            lat: this.searchQuery.lat,
+            lng: this.searchQuery.lng,
           },
         })
         .then((res) => {
@@ -39,8 +40,7 @@ export default {
 
 <template>
     <div>
-        <h1>Risultati della ricerca per: "{{ searchQuery }}"</h1>
-        
+        <h1>Risultati della ricerca per: "{{ searchQuery.q }}"</h1>
     </div>
 </template>
 
