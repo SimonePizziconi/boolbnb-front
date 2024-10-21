@@ -64,7 +64,7 @@
 
     <div class="container m-auto text">
       <!-- Swiper con 4 slide visibili per volta con loop infinito e blocco sull'hover -->
-      <h1 class="text-neutral">Appartamenti in evidenza</h1>
+      <h1 class="text-primary">Appartamenti in evidenza</h1>
       <swiper :autoplay="{delay : 5000, disableOnInteraction : false, pauseOnMouseEnter: true}" 
         :modules="modules" 
         :slides-per-view="4" space-between="20" loop="true"  
@@ -84,28 +84,28 @@
               class="w-full h-full rounded object-cover"
             >
             <!-- Dettagli dell'appartamento -->
-            <h3 class="text-center mt-2 text-neutral">{{ apartment.title }}</h3>
+            <h3 class="text-center mt-2 text-primary">{{ apartment.title }}</h3>
           </router-link>
         </swiper-slide>
       </swiper>
 
-      <!-- Swiper con 4 slide visibili per volta e navigazione con loop infinito e blocco sull'hover -->
-      <h1 class="text-neutral">Appartamenti non in evidenza</h1>
+     <!-- Swiper con 4 slide visibili per volta e navigazione con loop infinito e blocco sull'hover -->
+      <h1 class="text-primary">Appartamenti non in evidenza</h1>
       <div class="card-container flex flex-wrap justify-between">
         <div v-for="apartment in visibleApartments" :key="apartment.id" class="card">
           <router-link :to="{name:'details', params:{slug: apartment.slug}}" class="w-full rounded object-cover">
             <img 
               :src="apartment.image_path" 
               :alt="apartment.title" 
-              class="w-full h-full rounded object-cover"
+              class="w-full h-full rounded object-cover aspect-square" 
             >
-            <h3 class="text-center text-neutral">{{ apartment.title }}</h3>
+            <h3 class="text-center text-primary">{{ apartment.title }}</h3>
           </router-link>
         </div>
         <div class="flex w-full justify-center mt-10">
           <div>
             <!-- Mostra il bottone per caricare più appartamenti -->
-            <svg v-if="visibleApartments.length < apartments.length" @click="loadMore" class="animate-bounce h-10 bg-primary rounded-full text-white cursor-pointer w-20">
+            <svg v-if="visibleApartments.length < apartments.length" @click="loadMore" class="animate-bounce h-10 bg-accent rounded-full text-white cursor-pointer w-20">
               <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="12">Carica di più</text>
             </svg>
             <!-- Messaggio quando non ci sono più appartamenti -->
@@ -171,8 +171,14 @@
   gap: 30px;
 
   .card{
-    width: calc(100% / 5 - 30px);
-    margin-top: 40px;
+    aspect-ratio: 1 / 1; 
+    width: calc(100% / 5 - 30px); 
+    margin-top: 40px; 
+
+    .card img {
+      object-fit: cover; // Assicura che l'immagine riempia l'area senza distorsione
+      border-radius: 10px; // Arrotonda gli angoli dell'immagine
+    }
   }
 }
 }

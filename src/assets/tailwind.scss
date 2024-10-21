@@ -27,5 +27,5 @@ h6 {
 }
 
 body {
-    background-color: rgba(85, 107, 47, 0.7); /* 0.5 è il valore di opacità */
-}
+    @apply bg-neutral; /* Aggiungi Tailwind per il body */
+  }
