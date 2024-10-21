@@ -12,25 +12,35 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
-
   },
   data() {
     return {
-      apartments: [],   
+      filterRadius: 20,
+      apartments: [],
+      rooms: 1,
+      beds: 1,
+      services: [],   
+      selectedServices: [], // Servizi selezionati dall'utente
+      isModalOpen: false,   // Stato del modal (aperto/chiuso)
     };
   },
   computed: {
     searchQuery() {
+      
       return this.$route.query || "";
     },
   },
   methods: {
     fetchSearchResults() {      
       // Effettua la chiamata API con il parametro di ricerca
-      axios.get('http://localhost:8000/api/apartments/search', {
+      axios.get(store.apiUrl + 'apartments/search', {
           params: {
             lat: this.searchQuery.lat,
             lng: this.searchQuery.lng,
+            radius: this.filterRadius || 20,
+            rooms: this.rooms || 1,
+            beds: this.beds || 1,
+            services: this.selectedServices || []
           },
         })
         .then((res) => {
@@ -41,8 +51,25 @@ export default {
           console.log(error.message);
         })
     },
+    getServices(){
+      axios.get(store.apiUrl + 'services')
+        .then(res => {
+          this.services = res.data.services;
+        })
+        .catch(error => {
+          console.log(error.message);
+        })
+    },
+    toggleModal() {
+      this.isModalOpen = !this.isModalOpen;
+      console.log(this.selectedServices);
+    },
+    // applyFilters() {
+    //   this.toggleModal(); 
+    // }
   },
   mounted() {
+    this.getServices();
     this.fetchSearchResults();
   },
   watch: {
@@ -56,14 +83,52 @@ export default {
       }
     }
   },
-
-  
 };
 </script>
 
 <template>
     <div>
         <h1>Risultati della ricerca per: "{{ searchQuery.q }}"</h1>
+        <div class="filters">
+          <form @submit.prevent="fetchSearchResults">
+              <div>
+                <label for="radius">Raggio(km):</label>
+                <input name="radius" id="radius" type="number" value="20" v-model="filterRadius">
+              </div>
+              <div>
+                <label for="rooms">Stanze:</label>
+                <input name="rooms" id="rooms" type="number" value="1" v-model="rooms">
+              </div>
+              <div>
+                <label for="beds">Posti Letto:</label>
+                <input name="beds" id="beds" type="number" value="1" v-model="beds">
+              </div>
+              <div>
+                <button @click="toggleModal" class="btn">Servizi</button>
+              </div>
+              <button type="submit">Invia</button>
+          </form>
+        </div>
+
+        <!-- Modal per la selezione dei servizi -->
+        <div v-if="isModalOpen" class="fixed max-h-fit inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-auto">
+          <div class="bg-white p-8 rounded-lg max-w-lg w-full">
+            <h2 class="text-xl mb-4">Seleziona i servizi</h2>
+
+            <!-- Lista servizi -->
+            <div v-for="service in services" :key="service.id" class="flex items-center mb-2">
+              <input type="checkbox" class="filter-checkbox" :id="service.id" v-model="selectedServices" :value="service.id">
+              <label :for="service.id" class="ml-2">{{ service.name }}</label>
+            </div>
+
+            <!-- Bottoni per chiudere il modal -->
+            <div class="mt-4 flex justify-end space-x-2">
+              <button @click="toggleModal" class="btn bg-blue-500 text-white px-4 py-2 rounded">Applica</button>
+              <button @click="toggleModal" class="btn bg-gray-300 px-4 py-2 rounded">Chiudi</button>
+            </div>
+          </div>
+        </div>
+
         <swiper :autoplay="{delay : 5000, disableOnInteraction : false, pauseOnMouseEnter: true}" 
         :modules="modules" 
         :slides-per-view="4" space-between="20" loop="false"  
