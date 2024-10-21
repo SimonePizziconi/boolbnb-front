@@ -145,9 +145,8 @@
                 <div class="border-t-2 border-secondary">
                     <h4 class="font-bold ms-2">Servizi</h4>
 
-                    <div class="flex flex-col flex-wrap h-fit max-h-96">
                     <!-- Verifica se ci sono servizi -->
-                    <div v-if="apartment.services && apartment.services.length > 0">
+                    <div class="flex flex-col flex-wrap h-fit max-h-96" v-if="apartment.services && apartment.services.length > 0">
                         <div class="ms-2 mb-1 me-2" v-for="service in apartment.services" :key="service.id">
                             <i :class="`fas fa-${getServiceIcon(service.name)}`" class="text-lg"></i> {{ service.name }} 
                         </div>
@@ -156,11 +155,7 @@
                     <div v-else>
                         <span class="ms-2">Nessun servizio disponibile per questo appartamento.</span>
                     </div>
-                </div>
-                </div>
 
-                <div>
-                    
                 </div>
 
             </div>
