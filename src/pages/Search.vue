@@ -124,11 +124,11 @@ export default {
 
               <!-- bottone menù servizi -->
               <div class="text-center">
-                <button class="btn bg-accent text-neutral font-bold w-fit h-fit p-2 ps-6 pe-6 rounded-lg mt-5 hover:bg-lime-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent transition hover:bg-lime-600 duration-300" @click="toggleModal">Servizi</button>
+                <button class="btn bg-accent text-neutral font-bold w-fit h-fit p-2 ps-6 pe-6 rounded-lg mt-5 hover:bg-lime-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent transition duration-300" @click="toggleModal">Servizi</button>
               </div>
 
               <!-- invio -->
-              <button class="auto-rows-max bg-secondary text-neutral font-bold w-fit h-fit p-2 ps-6 pe-6 rounded-lg mt-5 hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2         focus-visible:outline-secondary transition bg-blue-500 hover:bg-indigo-500 duration-300" type="submit">Filtra</button>
+              <button class="auto-rows-max bg-secondary text-neutral font-bold w-fit h-fit p-2 ps-6 pe-6 rounded-lg mt-5 hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2         focus-visible:outline-secondary transition duration-300" type="submit">Filtra</button>
           </form>
         </div>
 
@@ -136,10 +136,10 @@ export default {
 
         <!-- Modal per la selezione dei servizi -->
         <div v-if="isModalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-primary bg-opacity-50">
-          <div class="bg-white p-8 rounded-lg w-fit">
+          <div class="bg-white p-8 rounded-lg w-5/6">
             <h2 class="text-xl mb-4">Seleziona i servizi</h2>
 
-            <div class="flex flex-col flex-wrap h-fit max-h-96 w-fit w-full">
+            <div class="flex flex-col flex-wrap h-fit max-h-96">
               
               <!-- Lista servizi -->
               <div v-for="service in services" :key="service.id" class="flex items-center m-2">
@@ -150,9 +150,9 @@ export default {
             </div>
 
             <!-- Bottoni per chiudere il modal -->
-            <div class="mt-4 flex justify-center space-x-2 mt-6">
-              <button @click="toggleModal" class="btn bg-blue-500 text-white px-4 py-2 rounded bg-accent">Applica</button>
-              <button @click="toggleModal" class="btn bg-gray-300 px-4 py-2 rounded bg-background">Chiudi</button>
+            <div class="mt-4 flex justify-center space-x-2">
+              <button @click="toggleModal" class="btn text-white px-4 py-2 rounded bg-accent">Applica</button>
+              <button @click="toggleModal" class="btn bg-gray-300 px-4 py-2 rounded ">Chiudi</button>
             </div>
 
           </div>
