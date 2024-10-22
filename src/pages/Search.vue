@@ -98,7 +98,7 @@ export default {
                   <label for="radius">Distanza(km)</label>
                 </div>
                 <div class="text-center">
-                  <input class="w-1/3 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200" name="radius" id="radius" type="number" value="20" v-model="filterRadius" min="0">
+                  <input class="w-1/3 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200" name="radius" id="radius" type="number" value="20" v-model="filterRadius" min="0" @input="fetchSearchResults">
                 </div>
               </div>
 
@@ -108,7 +108,7 @@ export default {
                   <label for="rooms">Stanze:</label>
                 </div>
                 <div class="text-center">
-                  <input class="w-1/3 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200" name="rooms" id="rooms" type="number" value="1" v-model="rooms" min="1">
+                  <input class="w-1/3 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200" name="rooms" id="rooms" type="number" value="1" v-model="rooms" min="1" @input="fetchSearchResults">
                 </div>
               </div>
 
@@ -118,13 +118,15 @@ export default {
                   <label for="beds">Posti Letto:</label>
                 </div>
                 <div class="text-center">
-                  <input class="w-1/3 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200" name="beds" id="beds" type="number" value="1" v-model="beds" min="1">
+                  <input class="w-1/3 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200" name="beds" id="beds" type="number" value="1" v-model="beds" min="1" @input="fetchSearchResults">
                 </div>
               </div>
 
               <!-- bottone menù servizi -->
               <div class="text-center">
-                <button class="btn bg-accent text-neutral font-bold w-fit h-fit p-2 ps-6 pe-6 rounded-lg mt-5 hover:bg-lime-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent transition duration-300" @click="toggleModal">Servizi</button>
+                <button class="btn bg-accent text-neutral font-bold w-fit h-fit p-2 ps-6 pe-6 rounded-lg mt-5 hover:bg-lime-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent transition duration-300" @click="toggleModal">
+                  {{ this.selectedServices.length > 0 ? 'Servizi (' + this.selectedServices.length + ')' : 'Servizi' }}
+                </button>
               </div>
 
               <!-- invio -->
@@ -143,7 +145,7 @@ export default {
               
               <!-- Lista servizi -->
               <div v-for="service in services" :key="service.id" class="flex items-center m-2">
-                <input type="checkbox" class="filter-checkbox rounded-sm checked:bg-accent outline-accent focus:outline-accent" :id="service.id" v-model="selectedServices" :value="service.id">
+                <input type="checkbox" class="filter-checkbox rounded-sm checked:bg-accent outline-accent focus:outline-accent" :id="service.id" v-model="selectedServices" :value="service.id" @change="fetchSearchResults">
                 <label :for="service.id" class="ml-2">{{ service.name }}</label>
               </div>
 
