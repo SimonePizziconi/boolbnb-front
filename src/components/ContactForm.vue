@@ -5,15 +5,19 @@
     export default {
         name: 'ContactForm',
 
+        props: {
+            apartmentSlug: String
+        },
+
         data(){
             return{
-                name:'',
-                surname:'',
+                first_name:'',
+                last_name:'',
                 email:'',
                 message:'',
                 errors: {
-                    name:[],
-                    surname:[],
+                    first_name:[],
+                    last_name:[],
                     email:[],
                     message:[],
                 },
@@ -38,14 +42,14 @@
                 this.sending = true;
 
                 const data = {
-                    name: this.name,
-                    surname: this.surname,
+                    first_name: this.first_name,
+                    last_name: this.last_name,
                     email: this.email,
                     message: this.message
                 }
-                // console.log(data);
+                console.log(data);
                 
-                axios.post(store.apiUrl + 'message', data)
+                axios.post(store.apiUrl + 'message/' + this.apartmentSlug, data)
                     .then(res => {
                         this.sending = false;
                         console.log(res.data);
@@ -54,13 +58,13 @@
                         }else{
                             this.sent = true;
                             this.errors = {
-                                name:[],
-                                surname:[],
+                                first_name:[],
+                                last_name:[],
                                 email:[],
                                 message:[],
                             }
                         }
-                        console.log(this.errors);
+                        //console.log(this.errors);
                         
                     })
             }
@@ -68,6 +72,7 @@
 
         mounted(){
             this.getUser()
+            console.log(this.apartmentSlug);
             
         }
     }
@@ -91,18 +96,18 @@
                 <div>
                     <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">Nome</label>
                     <div class="mt-2.5">
-                    <input v-model="name" type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6">
+                    <input v-model="first_name" type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6">
                     </div>
-                    <p class="text-red-600 text-xs mt-1">{{ errors.name?.toString() }}</p>
+                    <p class="text-red-600 text-xs mt-1">{{ errors.first_name?.toString() }}</p>
                 </div>
 
                 <!-- cognome -->
                 <div>
                     <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Cognome</label>
                     <div class="mt-2.5">
-                    <input v-model="surname" type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6">
+                    <input v-model="last_name" type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6">
                     </div>
-                    <p class="text-red-600 text-xs mt-1">{{ errors.surname?.toString() }}</p>
+                    <p class="text-red-600 text-xs mt-1">{{ errors.last_name?.toString() }}</p>
                 </div>
 
                 <!-- email -->

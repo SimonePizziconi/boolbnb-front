@@ -161,7 +161,7 @@
             </div>
 
             <div class="rounded-md mt-10 mb-10 text-center sticky"> 
-                <ContactForm></ContactForm>
+                <ContactForm :apartmentSlug="this.slug"></ContactForm>
             </div>
 
         </div>
