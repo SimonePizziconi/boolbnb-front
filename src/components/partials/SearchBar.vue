@@ -39,16 +39,23 @@ export default {
         submitSearch() {
             // Reindirizza alla pagina di ricerca con il parametro di ricerca
             this.$router.push({ name: "search", query: { q: this.searchQuery, lat: this.lat, lng: this.lng } });
-            this.searchQuery = '';
-            this.lat = '';
-            this.lng = '';
         },
+    },
+    watch: {
+        // Quando la route cambia, svuota i campi se esci dalla pagina di ricerca
+        $route(to, from) {
+            if (from.name === 'search' && to.name !== 'search') {
+                this.searchQuery = '';
+                this.lat = '';
+                this.lng = '';
+            }
+        }
     },
 };
 </script>
 
 <template>
-    <div class="relative w-full max-w-md">
+    <div class="search-bar relative w-full max-w-md">
         <form @submit.prevent="submitSearch" class="flex space-x-2">
             <input
                 type="text"
