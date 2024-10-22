@@ -18,7 +18,9 @@
           return {
             store,
             apartments: [],
-            visibleApartments: [],
+            sponsorshipApartments: [],
+            nonSponsorshipApartments: [],
+            visibleNonSponsorshipApartments: [],
             apartmentsPerLoad: 10,
             loading:true,
           };
@@ -28,19 +30,26 @@
                 axios.get(store.apiUrl + 'apartments')
                     .then(res => {
                         this.apartments = res.data.apartments;
-                        this.visibleApartments = this.apartments.slice(0, this.apartmentsPerLoad);
-                        console.log(res.data.apartments);
+                      
+                        this.nonSponsorshipApartments = this.apartments.filter(apartment => {
+                        return apartment.sponsorships.length === 0;
+                        });
+
+                        this.sponsorshipApartments = this.apartments.filter(apartment => {
+                          return apartment.sponsorships.length > 0;
+                        });
+                        
+                        this.visibleNonSponsorshipApartments = this.nonSponsorshipApartments.slice(0, this.apartmentsPerLoad);
                         this.loading = false;
                     })
                     .catch(error => {
                         console.error("Errore nel caricamento degli appartamenti: ", error);
                     });
             },
-            loadMore() {
-                // Aggiunge altre 4 card all'array visibile
-                const currentLength = this.visibleApartments.length;
-                const moreApartments = this.apartments.slice(currentLength, currentLength + this.apartmentsPerLoad);
-                this.visibleApartments.push(...moreApartments);
+            loadMoreNonSponsorship() {
+              const currentLength = this.visibleNonSponsorshipApartments.length;
+              const moreApartments = this.nonSponsorshipApartments.slice(currentLength, currentLength + this.apartmentsPerLoad);
+              this.visibleNonSponsorshipApartments.push(...moreApartments);
             }
         },
         mounted() {
@@ -75,7 +84,7 @@
         1280: { slidesPerView: 4 }
         }" class="my-swiper">
         <!-- Cicliamo gli appartamenti per ogni slide -->
-        <swiper-slide v-for="apartment in apartments" :key="apartment.id">
+        <swiper-slide v-for="apartment in sponsorshipApartments" :key="apartment.id">
           <router-link :to="{name:'details', params:{slug: apartment.slug}}" class="card gap-1 mt-5 flex flex-col justify-center items-center text-center relative">
             <div class="ribbon">Nuovo</div>
             <img 
@@ -90,29 +99,27 @@
       </swiper>
 
      <!-- Swiper con 4 slide visibili per volta e navigazione con loop infinito e blocco sull'hover -->
-      <h1 class="text-primary">Appartamenti non in evidenza</h1>
-      <div class="card-container flex flex-wrap justify-between">
-        <div v-for="apartment in visibleApartments" :key="apartment.id" class="card">
-          <router-link :to="{name:'details', params:{slug: apartment.slug}}" class="w-full rounded object-cover">
-            <img 
-              :src="apartment.image_path" 
-              :alt="apartment.title" 
-              class="w-full h-full rounded object-cover aspect-square" 
-            >
-            <h3 class="text-center text-primary">{{ apartment.title }}</h3>
-          </router-link>
+     <h1 class="text-primary">Appartamenti senza Sponsorizzazioni</h1>
+        <div class="card-container flex flex-wrap justify-between">
+            <div v-for="apartment in visibleNonSponsorshipApartments" :key="apartment.id" class="card">
+                <router-link :to="{ name: 'details', params: { slug: apartment.slug } }" class="w-full rounded object-cover">
+                    <img 
+                        :src="apartment.image_path" 
+                        :alt="apartment.title" 
+                        class="w-full h-full rounded object-cover aspect-square" 
+                    >
+                    <h3 class="text-center text-primary">{{ apartment.title }}</h3>
+                </router-link>
+            </div>
+            <div class="flex w-full justify-center mt-10">
+                <div>
+                    <svg v-if="visibleNonSponsorshipApartments.length < nonSponsorshipApartments.length" @click="loadMoreNonSponsorship" class="animate-bounce h-10 bg-accent rounded-full text-white cursor-pointer w-20">
+                        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="12">Carica di più</text>
+                    </svg>
+                    <p v-else class="text-center mt-2">Non ci sono più appartamenti da caricare.</p>
+                </div>
+            </div>
         </div>
-        <div class="flex w-full justify-center mt-10">
-          <div>
-            <!-- Mostra il bottone per caricare più appartamenti -->
-            <svg v-if="visibleApartments.length < apartments.length" @click="loadMore" class="animate-bounce h-10 bg-accent rounded-full text-white cursor-pointer w-20">
-              <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="12">Carica di più</text>
-            </svg>
-            <!-- Messaggio quando non ci sono più appartamenti -->
-            <p v-else class="text-center mt-2">Non ci sono più appartamenti da caricare.</p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -176,9 +183,9 @@
     margin-top: 40px; 
 
     .card img {
-      object-fit: cover; // Assicura che l'immagine riempia l'area senza distorsione
-      border-radius: 10px; // Arrotonda gli angoli dell'immagine
-    }
+    object-fit: cover; // Assicura che l'immagine riempia l'area senza distorsione
+    border-radius: 10px; // Arrotonda gli angoli dell'immagine
+  }
   }
 }
 }
