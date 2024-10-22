@@ -86,7 +86,7 @@
         <!-- Cicliamo gli appartamenti per ogni slide -->
         <swiper-slide v-for="apartment in sponsorshipApartments" :key="apartment.id">
           <router-link :to="{name:'details', params:{slug: apartment.slug}}" class="card gap-1 mt-5 flex flex-col justify-center items-center text-center relative">
-            <div class="ribbon">Nuovo</div>
+            <div class="ribbon">Sponsorizzato</div>
             <img 
               :src="apartment.image_path" 
               :alt="apartment.title" 
@@ -167,7 +167,7 @@
       font-size: 0.8rem;
       font-weight: bold;
       z-index: 1;
-      width: 100px; 
+      width: 120px; 
       text-align: center;
       border-radius: 10px; 
       box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); 
