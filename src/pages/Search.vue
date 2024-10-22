@@ -4,8 +4,6 @@ import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
 import 'swiper/css';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-
 
 export default {
   name: 'Search',
@@ -22,6 +20,8 @@ export default {
       services: [],   
       selectedServices: [], // Servizi selezionati dall'utente
       isModalOpen: false,   // Stato del modal (aperto/chiuso)
+      isLoading: false,
+      count: 0
     };
   },
   computed: {
@@ -31,7 +31,8 @@ export default {
     },
   },
   methods: {
-    fetchSearchResults() {      
+    fetchSearchResults() {  
+      this.isLoading = true;    
       // Effettua la chiamata API con il parametro di ricerca
       axios.get(store.apiUrl + 'apartments/search', {
           params: {
@@ -45,10 +46,12 @@ export default {
         })
         .then((res) => {
           this.apartments = res.data.apartments; 
-          console.log(res.data.apartments);
+          this.count = res.data.count;
+          this.isLoading = false;
         })
         .catch((error) => {
           console.log(error.message);
+          this.isLoading = false;
         })
     },
     getServices(){
@@ -64,9 +67,6 @@ export default {
       this.isModalOpen = !this.isModalOpen;
       console.log(this.selectedServices);
     },
-    // applyFilters() {
-    //   this.toggleModal(); 
-    // }
   },
   mounted() {
     this.getServices();
@@ -98,7 +98,7 @@ export default {
                   <label for="radius">Distanza(km)</label>
                 </div>
                 <div class="text-center">
-                  <input class="w-1/3 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200" name="radius" id="radius" type="number" value="20" v-model="filterRadius">
+                  <input class="w-1/3 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200" name="radius" id="radius" type="number" value="20" v-model="filterRadius" min="0">
                 </div>
               </div>
 
@@ -108,7 +108,7 @@ export default {
                   <label for="rooms">Stanze:</label>
                 </div>
                 <div class="text-center">
-                  <input class="w-1/3 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200" name="rooms" id="rooms" type="number" value="1" v-model="rooms">
+                  <input class="w-1/3 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200" name="rooms" id="rooms" type="number" value="1" v-model="rooms" min="1">
                 </div>
               </div>
 
@@ -118,7 +118,7 @@ export default {
                   <label for="beds">Posti Letto:</label>
                 </div>
                 <div class="text-center">
-                  <input class="w-1/3 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200" name="beds" id="beds" type="number" value="1" v-model="beds">
+                  <input class="w-1/3 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200" name="beds" id="beds" type="number" value="1" v-model="beds" min="1">
                 </div>
               </div>
 
@@ -128,11 +128,11 @@ export default {
               </div>
 
               <!-- invio -->
-              <button class="auto-rows-max bg-secondary text-neutral font-bold w-fit h-fit p-2 ps-6 pe-6 rounded-lg mt-5 hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2         focus-visible:outline-secondary transition duration-300" type="submit">Filtra</button>
+              <button class="auto-rows-max bg-secondary text-neutral font-bold w-fit h-fit p-2 ps-6 pe-6 rounded-lg mt-5 hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2         focus-visible:outline-secondary transition duration-300" type="submit">
+                {{ this.isLoading ? 'In corso...' : 'Filtra' }}
+              </button>
           </form>
         </div>
-
-        <h1 class="mt-8">Risultati della ricerca per: "{{ searchQuery.q }}"</h1>
 
         <!-- Modal per la selezione dei servizi -->
         <div v-if="isModalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-primary bg-opacity-50">
@@ -158,6 +158,7 @@ export default {
           </div>
         </div>
 
+        <h3 class="mt-6">Numero Risultati: <strong>{{ this.count }}</strong></h3>
 
         <div class="grid grid-cols-4">
 
@@ -169,7 +170,7 @@ export default {
                 class="w-full h-full rounded object-cover"
               >
               <!-- Dettagli dell'appartamento -->
-              <h3 class="text-center mt-2">{{ apartment.title }}</h3>
+              <h6 class="text-center mt-2">{{ apartment.title }}</h6>
             </router-link>
           </div>
 
