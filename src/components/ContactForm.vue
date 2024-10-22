@@ -123,12 +123,12 @@
                     <p class="text-red-600 text-xs mt-1">{{ errors.message?.toString() }}</p>
                 </div>
                 
-                <!-- invio -->
-                </div>
-                    <div class="mt-10">
-                    <button type="submit" class="block w-full rounded-md bg-secondary px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2    focus-visible:outline-secondary transition delay-150 bg-blue-500 hover:bg-indigo-500 duration-300">Invia</button>
-                </div>
-            </form>
+                    <!-- invio -->
+                    </div>
+                        <div class="mt-10">
+                        <button type="submit" class="block w-full rounded-md bg-secondary px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2         focus-visible:outline-secondary transition delay-150 duration-300">Invia</button>
+                    </div>
+                </form>
 
             <div v-else class="min-h-[490px] flex items-center justify-center">
                 <div class="loader m-5 mx-auto"></div>
@@ -139,6 +139,8 @@
         <div v-else class="min-h-[490px] flex items-center justify-center border-b-2 border-secondary">
             <h2 class="font-bold">Messaggio inviato!</h2>
         </div>
+            
+
 
     </div>
 

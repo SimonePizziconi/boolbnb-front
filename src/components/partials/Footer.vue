@@ -39,7 +39,7 @@ export default {
           <a href="#">€ EUR</a>
         </li>
       </ul> -->
-      <div class="flex hidden md:flex space-x-4 pr-4">
+      <div class="flex md:flex space-x-4 pr-4">
         <a href="#">Italiano (IT)</a>
         <a href="#">-</a>
         <a href="#">€ EUR</a>
