@@ -136,7 +136,7 @@ export default {
 
         <!-- Modal per la selezione dei servizi -->
         <div v-if="isModalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-primary bg-opacity-50">
-          <div class="bg-white p-8 rounded-lg">
+          <div class="bg-white p-8 rounded-lg w-fit">
             <h2 class="text-xl mb-4">Seleziona i servizi</h2>
 
             <div class="flex flex-col flex-wrap h-fit max-h-96 w-fit w-full">
