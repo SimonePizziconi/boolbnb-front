@@ -172,7 +172,7 @@ export default {
                 class="w-full h-full rounded-t object-cover"
               >
               <!-- Dettagli dell'appartamento -->
-              <div class="text-left w-full bg-background rounded-b ps-4 pe-4 text-center truncate">
+              <div class="w-full bg-background rounded-b ps-4 pe-4 text-center truncate">
                 <h6 class="font-bold text-secondary mt-3 mb-4 sm:text-xl lg:text-lg truncate">{{ apartment.title }}</h6>
 
                 <span class="lg:text-sm sm:text-md pb-2 pt-2 mt-4 border-b-2 border-t-2 border-accent me-2 truncate"><i class="fa-solid fa-location-dot me-2 text-accent"></i>{{ apartment.address }}</span>
