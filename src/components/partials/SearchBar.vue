@@ -38,7 +38,7 @@ export default {
         },
         submitSearch() {
             // Reindirizza alla pagina di ricerca con il parametro di ricerca
-            this.$router.push({ name: "search", query: { q: this.searchQuery, lat: this.lat, lng: this.lng } });
+            this.$router.push({ name: "search", query: { q: this.searchQuery, lat: this.lat, lng: this.lng, radius: 20, rooms: 1, beds: 1, services: [] } });
         },
     },
     watch: {

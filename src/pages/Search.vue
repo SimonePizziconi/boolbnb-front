@@ -26,7 +26,6 @@ export default {
   },
   computed: {
     searchQuery() {
-      
       return this.$route.query || "";
     },
   },
