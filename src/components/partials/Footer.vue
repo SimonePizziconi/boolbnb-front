@@ -1,5 +1,4 @@
 <script>
-import Logo from './Logo.vue';
 import { ref } from 'vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
