@@ -160,7 +160,7 @@ export default {
           </div>
         </div>
 
-        <h3 class="mt-6">Numero Risultati: <strong>{{ this.count }}</strong></h3>
+        <h3 class="mt-6">Appartamenti Disponibili: <strong>{{ this.count }}</strong></h3>
 
         <div class="grid lg:grid-cols-4 pb-20 md:grid-cols-2 sm:grid-cols-1 gap-4">
 
