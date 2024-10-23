@@ -57,7 +57,7 @@ export default {
             radius: store.radius || 20,
             rooms: store.rooms || 1,
             beds: store.beds || 1,
-            services: store.selectedServices || []
+            services: selectedServices || []
           },
         })
         .then((res) => {

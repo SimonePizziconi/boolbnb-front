@@ -7,9 +7,6 @@ export default {
     data() {
         return {
             store,
-            // searchQuery: '',
-            // lat: '',
-            // lng: '',
             results: [],
         };
     },
