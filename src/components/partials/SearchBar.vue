@@ -50,6 +50,10 @@ export default {
                 store.searchQuery = '';
                 store.lat = '';
                 store.lng = '';
+                store.radius = 20;
+                store.rooms = 1;
+                store.beds = 1;
+                store.selectedServices = [];
             }
         }
     },
