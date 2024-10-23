@@ -1,23 +1,22 @@
 <script>
+import { store } from '../../store/store.js';
 import ttServices from '@tomtom-international/web-sdk-services';
 
 export default {
     name: 'SearchBar',
     data() {
         return {
-            searchQuery: '',
-            lat: '',
-            lng: '',
+            store,
             results: [],
         };
     },
     methods: {
         searchLocation() {
-            if (this.searchQuery.length > 2) {
+            if (store.searchQuery.length > 2) {
                 ttServices.services
                     .fuzzySearch({
                         key: 'd0Xq2xNT1UVJmJOO7pFoBBiHcFLGGy2Q',
-                        query: this.searchQuery,
+                        query: store.searchQuery,
                     })
                     .then(response => {
                         this.results = response.results;
@@ -32,22 +31,26 @@ export default {
         selectLocation(result) {
             console.log('Posizione selezionata:', result);
             this.results = [];
-            this.searchQuery = result.address.freeformAddress;
-            this.lat = result.position.lat;
-            this.lng = result.position.lng;
+            store.searchQuery = result.address.freeformAddress;
+            store.lat = result.position.lat;
+            store.lng = result.position.lng;
         },
         submitSearch() {
             // Reindirizza alla pagina di ricerca con il parametro di ricerca
-            this.$router.push({ name: "search", query: { q: this.searchQuery, lat: this.lat, lng: this.lng, radius: 20, rooms: 1, beds: 1, services: [] } });
+            this.$router.push({ name: "search", query: { q: store.searchQuery, lat: store.lat, lng: store.lng, radius: store.radius, rooms: store.rooms, beds: store.beds, services: store.selectedServices } });
         },
     },
     watch: {
         // Quando la route cambia, svuota i campi se esci dalla pagina di ricerca
         $route(to, from) {
             if (from.name === 'search' && to.name !== 'search') {
-                this.searchQuery = '';
-                this.lat = '';
-                this.lng = '';
+                store.searchQuery = '';
+                store.lat = '';
+                store.lng = '';
+                store.radius = 20;
+                store.rooms = 1;
+                store.beds = 1;
+                store.selectedServices = [];
             }
         }
     },
@@ -59,7 +62,7 @@ export default {
         <form @submit.prevent="submitSearch" class="flex space-x-2">
             <input
                 type="text"
-                v-model="searchQuery"
+                v-model="store.searchQuery"
                 placeholder="Cerca una destinazione..."
                 @input="searchLocation"
                 class="w-full p-2 border border-accent rounded-lg text-black focus:border-secondary  focus:outline-none"

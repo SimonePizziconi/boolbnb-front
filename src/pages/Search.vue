@@ -15,12 +15,13 @@ export default {
   },
   data() {
     return {
-      filterRadius: 20,
+      store,
+      radius: store.radius,
       apartments: [],
-      rooms: 1,
-      beds: 1,
-      services: [],   
-      selectedServices: [], // Servizi selezionati dall'utente
+      rooms: store.rooms,
+      beds: store.beds,
+      services: store.services,   
+      selectedServices: store.selectedServices, // Servizi selezionati dall'utente
       isModalOpen: false,   // Stato del modal (aperto/chiuso)
       isLoading: false,
       count: 0
@@ -32,20 +33,37 @@ export default {
     },
   },
   methods: {
+    updateQueryParams() {
+        // Aggiorna l'URL con i parametri correnti
+        this.$router.replace({
+            name: "search",
+            query: {
+                q: store.searchQuery,
+                lat: store.lat,
+                lng: store.lng,
+                radius: store.radius,
+                rooms: store.rooms,
+                beds: store.beds,
+                services: store.selectedServices
+            }
+        });
+    },
     fetchSearchResults() {  
-      this.isLoading = true;    
+      this.isLoading = true;  
+      const selectedServices = store.selectedServices.map(service => service.name);  
       // Effettua la chiamata API con il parametro di ricerca
       axios.get(store.apiUrl + 'apartments/search', {
           params: {
             lat: this.searchQuery.lat,
             lng: this.searchQuery.lng,
-            radius: this.filterRadius || 20,
-            rooms: this.rooms || 1,
-            beds: this.beds || 1,
-            services: this.selectedServices || []
+            radius: store.radius || 20,
+            rooms: store.rooms || 1,
+            beds: store.beds || 1,
+            services: selectedServices || []
           },
         })
         .then((res) => {
+          this.updateQueryParams();
           this.apartments = res.data.apartments; 
           this.count = res.data.count;
           this.isLoading = false;
@@ -58,7 +76,7 @@ export default {
     getServices(){
       axios.get(store.apiUrl + 'services')
         .then(res => {
-          this.services = res.data.services;
+          store.services = res.data.services;
         })
         .catch(error => {
           console.log(error.message);
@@ -66,7 +84,7 @@ export default {
     },
     toggleModal() {
       this.isModalOpen = !this.isModalOpen;
-      console.log(this.selectedServices);
+      // console.log(this.selectedServices);
     },
   },
   mounted() {
@@ -99,7 +117,7 @@ export default {
                   <label for="radius">Distanza(km)</label>
                 </div>
                 <div class="text-center">
-                  <input class="md:w-2/5 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200 text-center" name="radius" id="radius" type="number" value="20" v-model="filterRadius" min="0" @input="fetchSearchResults">
+                  <input class="md:w-2/5 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200 text-center" name="radius" id="radius" type="number" value="20" v-model="store.radius" min="0" @input="fetchSearchResults">
                 </div>
               </div>
 
@@ -109,7 +127,7 @@ export default {
                   <label for="rooms">Stanze:</label>
                 </div>
                 <div class="text-center">
-                  <input class="md:w-2/5 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200 text-center" name="rooms" id="rooms" type="number" value="1" v-model="rooms" min="1" @input="fetchSearchResults">
+                  <input class="md:w-2/5 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200 text-center" name="rooms" id="rooms" type="number" value="1" v-model="store.rooms" min="1" @input="fetchSearchResults">
                 </div>
               </div>
 
@@ -119,14 +137,14 @@ export default {
                   <label for="beds">Posti Letto:</label>
                 </div>
                 <div class="text-center">
-                  <input class="md:w-2/5 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200 text-center" name="beds" id="beds" type="number" value="1" v-model="beds" min="1" @input="fetchSearchResults">
+                  <input class="md:w-2/5 rounded-lg focus:ring-2 focus:ring-inset focus:ring-accent border-none bg-gray-200 text-center" name="beds" id="beds" type="number" value="1" v-model="store.beds" min="1" @input="fetchSearchResults">
                 </div>
               </div>
 
               <!-- bottone menù servizi -->
               <div class="text-center">
                 <button class="btn bg-accent text-neutral font-bold w-fit h-fit p-2 ps-6 pe-6 rounded-lg mt-5 hover:bg-lime-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent transition duration-300" @click="toggleModal">
-                  {{ this.selectedServices.length > 0 ? 'Servizi (' + this.selectedServices.length + ')' : 'Servizi' }}
+                  {{ store.selectedServices.length > 0 ? 'Servizi (' + store.selectedServices.length + ')' : 'Servizi' }}
                 </button>
               </div>
 
@@ -145,8 +163,8 @@ export default {
             <div class="flex flex-col lg:flex-wrap h-fit max-h-96 lg:overflow-hidden sm:overflow-auto">
               
               <!-- Lista servizi -->
-              <div v-for="service in services" :key="service.id" class="flex items-center m-2">
-                <input type="checkbox" class="filter-checkbox rounded-sm checked:bg-accent outline-accent focus:outline-accent" :id="service.id" v-model="selectedServices" :value="service.id" @change="fetchSearchResults">
+              <div v-for="service in store.services" :key="service.id" class="flex items-center m-2">
+                <input type="checkbox" class="filter-checkbox rounded-sm checked:bg-accent outline-accent focus:outline-accent" :id="service.id" v-model="store.selectedServices" :value="service.name" @change="fetchSearchResults">
                 <label :for="service.id" class="ml-2">{{ service.name }}</label>
               </div>
 
@@ -170,6 +188,25 @@ export default {
             :key="apartment.id" 
             :apartment="apartment" 
           />
+          <!-- <div v-for="apartment in apartments" :key="apartment.id">
+            <router-link :to="{name:'details', params:{slug: apartment.slug}}" class="card mt-5 flex flex-col justify-center items-center relative shadow-lg">
+              <img 
+                :src="apartment.image_path" 
+                :alt="apartment.title" 
+                class="w-full h-full rounded-t object-cover"
+              > -->
+              <!-- Dettagli dell'appartamento -->
+              <!-- <div class="w-full bg-background rounded-b ps-4 pe-4 text-center truncate">
+                <h6 class="font-bold text-secondary mt-3 mb-4 sm:text-xl lg:text-lg truncate">{{ apartment.title }}</h6>
+                <p class="py-2">
+                  Distanza: {{ apartment.distance.toFixed(2) }} km
+                </p>
+                <span class="lg:text-sm sm:text-md pb-2 pt-2 mt-4 border-b-2 border-t-2 border-accent me-2 truncate"><i class="fa-solid fa-location-dot me-2 text-accent"></i>{{ apartment.address }}</span>
+                <span class="lg:text-sm sm:text-md pb-2 pt-2 mt-2 mb-2 block truncate"><i class="fa-solid fa-house-chimney text-secondary"></i> Stanze - {{ apartment.rooms }}  <i class="fa-solid fa-pen-ruler ms-3 text-secondary"></i> Metri quadrati - {{ apartment.square_meters }}</span>
+              </div>
+              
+            </router-link>
+          </div> -->
 
         </div>
 
