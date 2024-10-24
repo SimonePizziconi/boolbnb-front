@@ -1,4 +1,6 @@
 <script>
+import { store } from '@/store/store';
+import axios from 'axios';
 import SearchBar from './SearchBar.vue';
 import { ref } from 'vue';
 
@@ -7,6 +9,24 @@ export default {
   components: {
     SearchBar
   },
+  data(){
+    return {
+      store,
+      user: {}
+    }
+  },
+  methods: {
+    getUser(){
+        axios.get(store.apiUrl + 'user', { withCredentials: true })
+            .then(res => {
+              this.user = res.data.user;
+              console.log(this.user);
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }
+  },
   setup() {
     const menuOpen = ref(false);
     const toggleMenu = () => {
@@ -14,24 +34,28 @@ export default {
     };
     return { menuOpen, toggleMenu };
   },
+  mounted(){
+    this.getUser();
+  }
 };
 </script>
 
 <template>
-    <nav class="text-white fixed w-full z-10 top-0 left-0 flex bg-primary p-2">
-      <div class="container mx-auto px-4 py-2 flex justify-between items-center">
-        <!-- Logo -->
-        <div class="w-14">
-          <router-link to="/"><img src="../../../public/img/logo-bool-bnb.png" alt="Logo"></router-link>
-        </div>
+  <nav class="text-white fixed w-full z-10 top-0 left-0 flex bg-primary p-2">
+    <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+      <!-- Logo -->
+      <div class="w-14">
+        <router-link to="/"><img src="../../../public/img/logo-bool-bnb.png" alt="Logo"></router-link>
+      </div>
 
-        <!-- SearchBar -->
-        <SearchBar />
+      <!-- SearchBar -->
+      <SearchBar />
 
-        <!-- Link -->
+      <!-- Link -->
+      <div v-if="!this.user">
         <div class="hidden md:flex space-x-4">
-          <a href="http://localhost:8000/login">Accedi</a>
-          <a href="http://localhost:8000/register">Registrati</a>
+          <a class="hover:text-accent" href="http://localhost:8000/login">Accedi</a>
+          <a class="hover:text-accent" href="http://localhost:8000/register">Registrati</a>
         </div>
         <div class="md:hidden">
           <button @click="toggleMenu" class="focus:outline-none">
@@ -41,14 +65,28 @@ export default {
           </button>
         </div>
       </div>
-      <div v-if="menuOpen" class="md:hidden flex flex-col m-1">
-        <!-- <RouterLink to="/" class="block hover:bg-gray-700 px-3 py-2">Home</RouterLink> -->
-          <a href="http://127.0.0.1:8000/login">Login</a>
-          <a href="http://127.0.0.1:8000/register">Registrati</a>
-        <!-- <RouterLink to="/contacts" class="block hover:bg-gray-700 px-3 py-2">Contacts</RouterLink> -->
+
+      <!-- User -->
+      <div v-else>
+        <a href="http://localhost:8000/admin">
+          <div class="flex flex-col justify-center items-center text-neutral hover:text-accent">
+            <div class="p-5 aspect-square bg-accent hover:bg-neutral rounded-full relative">
+              <i class="fa-solid fa-user absolute top-1/2 left-1/2" style="transform:translate(-50%, -50%)"></i>
+            </div>
+            <small class="mt-1 hidden md:inline"> {{ this.user.first_name }} {{ this.user.last_name }}</small>
+          </div>
+        </a>
       </div>
-    </nav>
-  </template>
+
+    </div>
+    <div v-if="menuOpen" class="md:hidden flex flex-col m-1">
+      <!-- <RouterLink to="/" class="block hover:bg-gray-700 px-3 py-2">Home</RouterLink> -->
+      <a href="http://127.0.0.1:8000/login">Login</a>
+      <a href="http://127.0.0.1:8000/register">Registrati</a>
+      <!-- <RouterLink to="/contacts" class="block hover:bg-gray-700 px-3 py-2">Contacts</RouterLink> -->
+    </div>
+  </nav>
+</template>
   
 
   
