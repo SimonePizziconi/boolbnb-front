@@ -115,96 +115,101 @@
 
 <template>
 
-    <div class="loader-container" v-if="this.loading">
-        <Loader></Loader>
+<div class="loader-container" v-if="this.loading">
+    <Loader></Loader>
+</div>
+
+<div class="mt-20 mb-20 px-5 lg:px-20 pt-16" v-else>
+
+    <!-- Titolo e indirizzo -->
+    <div>
+        <h1 class="mt-2 text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">{{ apartment.title }}</h1>
+        <span class="block mt-2 text-lg text-gray-600">
+            <i class="fa-solid fa-location-dot me-2"></i>{{ apartment.address }}
+        </span>
     </div>
 
-    <div class="container pb-20 m-auto text" v-else>
+    <!-- Immagine principale -->
+    <div class="mt-4 pic-container rounded-md overflow-hidden">
+        <img class="h-full w-full object-cover object-center transition-transform duration-1000 hover:scale-105" 
+            :src="apartment.image_path" :alt="apartment.title">
+    </div>
 
-        <div class="mt-8">
-            <h1 class="mt-2x text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{ apartment.title }}</h1>
-            <span class="block"><i class="fa-solid fa-location-dot me-2"></i>{{ apartment.address }}</span>
-        </div>
-
-        <div class="mt-2 pic-container rounded-md overflow-hidden">
-            <img class="h-full w-full object-cover object-center transition-property:all hover:scale-105 duration-1000" :src="apartment.image_path" :alt="apartment.title">
-        </div>
-
-        <div class="grid lg:gap-8 grid-cols-1 gap-y-6 sm:mt-10 sm:gap-y-0 lg:grid-cols-3"> 
-
-            <div class="rounded-md mt-10 bg-gray-100 p-4 h-fit col-span-2 shadow-lg border border-neutral">
-
-                <!-- info appartemento -->
-                <div>
-                    <h4 class="font-bold ms-2">Cosa troverai</h4>
-                    <span class="block"><i class="fa-solid fa-house-chimney"></i> Numero di stanze - {{ apartment.rooms }}</span>
-                    <span class="block"><i class="fa-solid fa-bed"></i> Numero di letti - {{ apartment.beds }}</span>
-                    <span class="block"><i class="fa-solid fa-toilet-paper"></i> Numero di bagni - {{ apartment.bathrooms }}</span>
-                </div>
-
-                <div class="border-t-2 border-secondary">
-                    <h4 class="font-bold ms-2">Servizi</h4>
-
-                    <!-- Verifica se ci sono servizi -->
-                    <div class="flex flex-col flex-wrap h-fit max-h-96" v-if="apartment.services && apartment.services.length > 0">
-                        <div class="ms-2 mb-1 me-2" v-for="service in apartment.services" :key="service.id">
-                            <i :class="`fas fa-${getServiceIcon(service.name)}`" class="text-lg"></i> {{ service.name }} 
-                        </div>
-                    </div>
-                    <!-- Mostra un messaggio se non ci sono servizi -->
-                    <div v-else>
-                        <span class="ms-2">Nessun servizio disponibile per questo appartamento.</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="rounded-md mt-10 mb-10 text-center sticky"> 
-                <ContactForm :apartmentSlug="this.slug"></ContactForm>
-            </div>
-
-        </div>
-
-        <!-- Mappa TomTom -->
-        <div div class="border-t-2 border-secondary">
-            <h4 class="mt-5">Dove sarai</h4>
-            <div id="map" style="width: 100%; height: 500px;" class="img-fluid rounded shadow mt-3"></div>
-            <span class="block"><i class="fa-solid fa-location-dot me-2"></i>{{ apartment.address }}</span>
-        </div>
+    <!-- Informazioni e servizi dell'appartamento -->
+    <div class="grid gap-6 mt-10 lg:grid-cols-3"> 
         
+        <!-- Info appartamento e servizi -->
+        <div class="lg:col-span-2 bg-neutral p-4 rounded-md shadow-lg border border-neutral">
+
+            <!-- Informazioni -->
+            <div class="mb-6">
+                <h4 class="font-bold text-lg">Cosa troverai</h4>
+                <span class="block text-lg mt-2"><i class="fa-solid fa-house-chimney"></i> Numero di stanze - {{ apartment.rooms }}</span>
+                <span class="block text-lg mt-2"><i class="fa-solid fa-bed"></i> Numero di letti - {{ apartment.beds }}</span>
+                <span class="block text-lg mt-2"><i class="fa-solid fa-toilet-paper"></i> Numero di bagni - {{ apartment.bathrooms }}</span>
+            </div>
+
+            <!-- Servizi -->
+            <div class="border-t-2 border-secondary pt-4">
+                <h4 class="font-bold text-lg">Servizi</h4>
+
+                <!-- Verifica se ci sono servizi -->
+                <div class="flex flex-wrap mt-2" v-if="apartment.services && apartment.services.length > 0">
+                    <div class="ms-2 mb-2 flex items-center" v-for="service in apartment.services" :key="service.id">
+                        <i :class="`fas fa-${getServiceIcon(service.name)}`" class="text-lg mr-2"></i> 
+                        <span class="text-lg">{{ service.name }}</span> 
+                    </div>
+                </div>
+                <!-- Nessun servizio disponibile -->
+                <div v-else>
+                    <span class="ms-2 text-lg">Nessun servizio disponibile per questo appartamento.</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Contatto -->
+        <div class="rounded-md bg-neutral shadow-lg border border-neutral p-4 lg:p-6">
+            <ContactForm :apartmentSlug="this.slug"></ContactForm>
+        </div>
+
+        <!-- <div class="rounded-md p-4 lg:p-6 text-center"> 
+            <ContactForm :apartmentSlug="this.slug"></ContactForm>
+        </div> -->
 
     </div>
-    
+
+    <!-- Mappa TomTom -->
+    <div class="border-t-2 border-secondary mt-10">
+        <h4 class="mt-5 text-2xl">Dove sarai</h4>
+        <div id="map" class="w-full h-64 sm:h-80 lg:h-96 rounded shadow mt-3"></div>
+        <span class="block mt-2 text-lg">
+            <i class="fa-solid fa-location-dot me-2"></i>{{ apartment.address }}
+        </span>
+    </div>
+
+</div>
 </template>
+
 
 <style scoped lang="scss">
     h1{
         display: inline;
     }
 
-    .img-box {
-    
-    width: 100%;
-    height: 200px;
-  }
-
-  .pic-container{
-    height: 60vh;
-  }
-
-  .loader-container{
-    height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  div{
-    span.block{
-        padding: 0.5em;
-        font-size: 18px;
+    .pic-container {
+        height: 40vh;
+        @media (min-width: 1024px) {
+            height: 60vh;
+        }
     }
-  }
+
+    .loader-container {
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
+
 

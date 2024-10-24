@@ -73,48 +73,63 @@
   
   <div v-else>
 
-    <div class="container m-auto text">
-      <!-- Swiper con 4 slide visibili per volta con loop infinito e blocco sull'hover -->
-      <h1 class="text-primary">Appartamenti in evidenza</h1>
-      <swiper :autoplay="{delay : 3000, disableOnInteraction : false, pauseOnMouseEnter: true}" 
+    <div class="mt-20 mb-20 mx-5 lg:mx-20 pt-16">
+      <!-- Sezione Appartamenti in evidenza -->
+      <h1 class="text-primary text-xl lg:text-2xl font-bold">Appartamenti in evidenza</h1>
+      <swiper 
+        :autoplay="{delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true}" 
         :modules="modules" 
-        :slides-per-view="4" space-between="20" loop="true"  
+        :slides-per-view="4" 
+        space-between="20" 
+        loop="true"  
         :breakpoints="{
-        640: { slidesPerView: 1 },
-        768: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
-        1280: { slidesPerView: 4 }
-        }" class="my-swiper">
-        <!-- Cicliamo gli appartamenti con sponsorizzazioni -->
+          320: { slidesPerView: 1 },
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 4 },
+          1280: { slidesPerView: 4 }
+        }" 
+        class="my-swiper"
+      >
         <swiper-slide v-for="apartment in sponsorshipApartments" :key="apartment.id">
-          <Card :apartment="apartment" 
-          />
+          <Card :apartment="apartment" />
         </swiper-slide>
       </swiper>
 
-      <!-- Appartamenti senza sponsorizzazioni senza swiper -->
-      <h1 class="text-primary">Appartamenti senza Sponsorizzazioni</h1>
-      <div class="grid lg:grid-cols-4 pb-10 md:grid-cols-2 sm:grid-cols-1 gap-4 w-full">
+      <!-- Sezione Appartamenti senza sponsorizzazioni -->
+      <h1 class="text-primary text-xl lg:text-2xl font-bold mt-10">Appartamenti senza Sponsorizzazioni</h1>
+      <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 w-full pb-10">
         <Card 
-        v-for="apartment in visibleNonSponsorshipApartments" 
-        :key="apartment.id" 
-        :apartment="apartment" 
+          v-for="apartment in visibleNonSponsorshipApartments" 
+          :key="apartment.id" 
+          :apartment="apartment" 
         />
       </div>
             
       <!-- Bottone per caricare gli altri appartamenti -->
       <div class="w-full flex justify-center mt-4">
-          <svg v-if="visibleNonSponsorshipApartments.length < nonSponsorshipApartments.length" @click="loadMoreNonSponsorship" class="animate-bounce h-10 bg-accent rounded-full text-white cursor-pointer w-20">
-              <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="12">Carica di più</text>
-          </svg>
-          <p v-else class="text-center mt-2">Non ci sono più appartamenti da caricare.</p>
+        <svg 
+          v-if="visibleNonSponsorshipApartments.length < nonSponsorshipApartments.length" 
+          @click="loadMoreNonSponsorship" 
+          class="animate-bounce h-10 bg-accent rounded-full text-white cursor-pointer w-20"
+        >
+          <text 
+            x="50%" 
+            y="50%" 
+            text-anchor="middle" 
+            dominant-baseline="middle" 
+            fill="white" 
+            font-size="12"
+          >
+            Carica di più
+          </text>
+        </svg>
+        <p v-else class="text-center mt-2">Non ci sono più appartamenti da caricare.</p>
       </div>
     </div>
   </div>
-
-
-  
 </template>
+
 
 <style scoped lang="scss">
 
@@ -125,9 +140,4 @@
     align-items: center;
   }
 
-.container {
-  margin-top: 5%;
-  margin-bottom: 5%;
-
-}
 </style>

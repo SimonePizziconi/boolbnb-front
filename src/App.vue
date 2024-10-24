@@ -13,9 +13,7 @@
 <template>
   <div>
     <Navbar />
-    <div class="pt-16 mx-4"> <!-- Aggiungi padding-top per la navbar -->
-      <router-view />
-    </div>
+    <router-view />
     <Footer />
   </div>
 </template>

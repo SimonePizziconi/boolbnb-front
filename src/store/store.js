@@ -10,4 +10,5 @@ export const store = reactive({
     beds: 1,
     services: [],
     selectedServices: []
+    
 });
