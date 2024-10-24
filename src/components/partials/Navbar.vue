@@ -12,7 +12,8 @@ export default {
   data(){
     return {
       store,
-      user: {}
+      user: {},
+      isDropdownOpen: false,
     }
   },
   methods: {
@@ -25,7 +26,10 @@ export default {
             .catch(error => {
                 console.log(error.message);
             })
-    }
+    },
+    toggleDropdown() {
+      this.isDropdownOpen = !this.isDropdownOpen;
+    },
   },
   setup() {
     const menuOpen = ref(false);
@@ -68,14 +72,56 @@ export default {
 
       <!-- User -->
       <div v-else>
-        <a href="http://localhost:8000/admin">
-          <div class="flex flex-col justify-center items-center text-neutral hover:text-accent">
-            <div class="p-5 aspect-square bg-accent hover:bg-neutral rounded-full relative">
-              <i class="fa-solid fa-user absolute top-1/2 left-1/2" style="transform:translate(-50%, -50%)"></i>
-            </div>
-            <small class="mt-1 hidden md:inline"> {{ this.user.first_name }} {{ this.user.last_name }}</small>
+        <div class="relative inline-block text-left">
+          <div>
+            <button type="button" id="menu-button" aria-expanded="true" aria-haspopup="true" @click="toggleDropdown">
+              <div class="flex flex-col justify-center items-center text-neutral hover:text-accent">
+                <div class="p-5 aspect-square bg-accent hover:bg-neutral rounded-full relative">
+                  <i class="fa-solid fa-user absolute top-1/2 left-1/2" style="transform:translate(-50%, -50%)"></i>
+                </div>
+                <small class="mt-1 hidden md:inline"> {{ this.user.first_name }} {{ this.user.last_name }}</small>
+              </div>
+            </button>
           </div>
-        </a>
+
+          <!--
+            Dropdown menu, show/hide based on menu state.
+
+            Entering: "transition ease-out duration-100"
+              From: "transform opacity-0 scale-95"
+              To: "transform opacity-100 scale-100"
+            Leaving: "transition ease-in duration-75"
+              From: "transform opacity-100 scale-100"
+              To: "transform opacity-0 scale-95"
+          -->
+          <transition
+            enter-active-class="transition ease-out duration-100"
+            enter-from-class="transform opacity-0 scale-95"
+            enter-to-class="transform opacity-100 scale-100"
+            leave-active-class="transition ease-in duration-75"
+            leave-from-class="transform opacity-100 scale-100"
+            leave-to-class="transform opacity-0 scale-95"
+          >
+          <div v-if="isDropdownOpen" class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+            <div class="py-1" role="none">
+              <strong class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1">{{ this.user.email }}</strong>
+              <a href="http://localhost:8000/admin/" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-6">Area Personale</a>
+            </div>
+            <div class="py-1" role="none">
+              <a href="http://localhost:8000/admin/apartments" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-1">I Miei Appartamenti</a>
+              <a href="http://localhost:8000/admin/apartments/create" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-2">Nuovo Appartamento</a>
+            </div>
+            <div class="py-1" role="none">
+              <a href="http://localhost:8000/admin/sponsorships/payment" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-3">Sponsorizzazioni</a>
+              <a href="http://localhost:8000/admin/messagges" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-4">Messaggi</a>
+            </div>
+            <div class="py-1" role="none">
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-6">Logout</a>
+            </div>
+          </div>
+        </transition>
+        </div>
+
       </div>
 
     </div>
