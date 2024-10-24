@@ -75,7 +75,7 @@
 
     <div class="container m-auto text">
       <!-- Swiper con 4 slide visibili per volta con loop infinito e blocco sull'hover -->
-      <h1 class="text-primary">Appartamenti in evidenza</h1>
+      <h1 class="text-primary font-bold">Appartamenti in evidenza</h1>
       <swiper :autoplay="{delay : 3000, disableOnInteraction : false, pauseOnMouseEnter: true}" 
         :modules="modules" 
         :slides-per-view="4" space-between="20" loop="true"  
@@ -87,13 +87,13 @@
         }" class="my-swiper">
         <!-- Cicliamo gli appartamenti con sponsorizzazioni -->
         <swiper-slide v-for="apartment in sponsorshipApartments" :key="apartment.id">
-          <Card :apartment="apartment" 
+          <Card class="border-2 border-secondary rounded-md" :apartment="apartment" 
           />
         </swiper-slide>
       </swiper>
 
       <!-- Appartamenti senza sponsorizzazioni senza swiper -->
-      <h1 class="text-primary">Appartamenti senza Sponsorizzazioni</h1>
+      <h1 class="text-primary mt-20 mb-8 font-bold">I nostri appartamenti</h1>
       <div class="grid lg:grid-cols-4 pb-10 md:grid-cols-2 sm:grid-cols-1 gap-4 w-full">
         <Card 
         v-for="apartment in visibleNonSponsorshipApartments" 
@@ -104,7 +104,7 @@
             
       <!-- Bottone per caricare gli altri appartamenti -->
       <div class="w-full flex justify-center mt-4">
-          <svg v-if="visibleNonSponsorshipApartments.length < nonSponsorshipApartments.length" @click="loadMoreNonSponsorship" class="animate-bounce h-10 bg-accent rounded-full text-white cursor-pointer w-20">
+          <svg v-if="visibleNonSponsorshipApartments.length < nonSponsorshipApartments.length" @click="loadMoreNonSponsorship" class="animate-bounce h-10 bg-accent rounded-full text-white cursor-pointer w-28 pe-2 ps-2 font-bold">
               <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="12">Carica di più</text>
           </svg>
           <p v-else class="text-center mt-2">Non ci sono più appartamenti da caricare.</p>

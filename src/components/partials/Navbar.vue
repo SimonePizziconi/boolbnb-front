@@ -94,29 +94,29 @@ export default {
           >
           <div v-if="isDropdownOpen" class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-300 rounded-md bg-neutral shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
             <div class="py-1" role="none">
-              <strong class="block px-4 py-2 text-sm text-primary"  role="menuitem" tabindex="-1">{{ this.user.email }}</strong>
-              <a href="http://localhost:8000/admin/" class="block px-4 py-2 text-sm text-primary"  role="menuitem" tabindex="-1" id="menu-item-6">
+              <strong class="block px-4 py-2 text-sm text-primary hover:bg-accent hover:text-neutral transition duration-150"  role="menuitem" tabindex="-1">{{ this.user.email }}</strong>
+              <a href="http://localhost:8000/admin/" class="block px-4 py-2 text-sm text-primary hover:bg-accent hover:text-neutral"  role="menuitem" tabindex="-1" id="menu-item-6">
                 <span>Area Personale</span>
               </a>
             </div>
             <div class="py-1" role="none">
-              <a href="http://localhost:8000/admin/apartments" class="block px-4 py-2 text-sm text-primary"  role="menuitem" tabindex="-1" id="menu-item-1">
+              <a href="http://localhost:8000/admin/apartments" class="block px-4 py-2 text-sm text-primary hover:bg-accent hover:text-neutral transition duration-150"  role="menuitem" tabindex="-1" id="menu-item-1">
                 <span>I Miei Appartamenti</span>
               </a>
-              <a href="http://localhost:8000/admin/apartments/create" class="block px-4 py-2 text-sm text-primary"  role="menuitem" tabindex="-1" id="menu-item-2">
+              <a href="http://localhost:8000/admin/apartments/create" class="block px-4 py-2 text-sm text-primary hover:bg-accent hover:text-neutral transition duration-150"  role="menuitem" tabindex="-1" id="menu-item-2">
                 <span>Nuovo Appartamento</span>
               </a>
             </div>
             <div class="py-1" role="none">
-              <a href="http://localhost:8000/admin/sponsorships/payment" class="block px-4 py-2 text-sm text-primary"  role="menuitem" tabindex="-1" id="menu-item-3">
+              <a href="http://localhost:8000/admin/sponsorships/payment" class="block px-4 py-2 text-sm text-primary hover:bg-accent hover:text-neutral transition duration-150"  role="menuitem" tabindex="-1" id="menu-item-3">
                 <span>Sponsorizzazioni</span>
               </a>
-              <a href="http://localhost:8000/admin/messagges" class="block px-4 py-2 text-sm text-primary"  role="menuitem" tabindex="-1" id="menu-item-4">
+              <a href="http://localhost:8000/admin/messagges" class="block px-4 py-2 text-sm text-primary hover:bg-accent hover:text-neutral transition duration-150"  role="menuitem" tabindex="-1" id="menu-item-4">
                 <span>Messaggi</span>
               </a>
             </div>
             <div class="py-1" role="none">
-              <a href="#" class="block px-4 py-2 text-sm text-primary"  role="menuitem" tabindex="-1" id="menu-item-6">
+              <a href="#" class="block px-4 py-2 text-sm text-primary hover:bg-accent hover:text-neutral"  role="menuitem" tabindex="-1" id="menu-item-6">
                 <span>Logout</span>
               </a>
             </div>

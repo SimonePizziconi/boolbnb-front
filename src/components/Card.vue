@@ -1,11 +1,14 @@
 <template>
     <router-link :to="{name:'details', params:{slug: apartment.slug}}" class="card mt-5 flex flex-col justify-center items-center relative shadow-lg">
         <div v-if="apartment.sponsorships.length > 0" class="ribbon">Sponsorizzato</div>
-            <img 
-            :src="apartment.image_path" 
-            :alt="apartment.title" 
-            class="w-full h-full rounded-t object-cover"
-            >
+            <div class="w-full h-full rounded-t overflow-hidden">
+                <img 
+                :src="apartment.image_path" 
+                :alt="apartment.title" 
+                class="w-full h-full rounded-t object-cover hover:scale-110 transition duration-700"
+                >
+            </div>
+            
         <!-- Dettagli dell'appartamento -->
         <div class="w-full bg-background rounded-b ps-4 pe-4 text-center truncate">
             <h6 class="font-bold text-secondary mt-3 mb-4 sm:text-xl lg:text-lg truncate">{{ apartment.title }}</h6>
@@ -39,9 +42,9 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background-color: #fff;
-      opacity: 0.8;
-      color: #000;
+      background-color: #006D77;
+      opacity: 0.9;
+      color: #F0F0F0;
       padding: 5px 15px;
       font-size: 0.8rem;
       font-weight: bold;

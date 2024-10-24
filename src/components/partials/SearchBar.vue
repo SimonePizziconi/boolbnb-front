@@ -69,7 +69,7 @@ export default {
             />
             <button
                 type="submit"
-                class="px-4 py-2 bg-accent text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring"
+                class="px-4 py-2 bg-accent text-white rounded-lg hover:bg-lime-700 focus:outline-none focus:ring font-bold focus-visible:outline-accent ring-primary transition duration-300"
             >
                 Cerca
             </button>

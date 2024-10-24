@@ -136,7 +136,7 @@
                     <!-- invio -->
                     </div>
                         <div class="mt-10">
-                        <button type="submit" class="block w-full rounded-md bg-secondary px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2         focus-visible:outline-secondary transition delay-150 duration-300">Invia</button>
+                        <button type="submit" class="block w-full rounded-md bg-secondary px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2         focus-visible:outline-secondary transition duration-300">Invia</button>
                     </div>
                 </form>
 

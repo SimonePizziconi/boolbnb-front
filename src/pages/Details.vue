@@ -121,7 +121,7 @@
 
     <div class="container pb-20 m-auto text" v-else>
 
-        <div class="mt-8">
+        <div class="mt-20">
             <h1 class="mt-2x text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{ apartment.title }}</h1>
             <span class="block"><i class="fa-solid fa-location-dot me-2"></i>{{ apartment.address }}</span>
         </div>
