@@ -150,10 +150,10 @@
     </div>
 
     <!-- Informazioni e servizi dell'appartamento -->
-    <div class="grid gap-6 mt-10 lg:grid-cols-3 sm:grid-cols-1 sm:gap-x-0"> 
+    <div class="grid mt-10 lg:grid-cols-2 grid-cols-1 gap-y-6 gap-x-0 md:gap-6"> 
         
         <!-- Info appartamento e servizi -->
-        <div class=" bg-neutral p-4 rounded-md shadow-lg border border-neutral" :class="this.apartment.user_id !== this.userId ? 'col-span-2' : 'col-span-4'">
+        <div class=" bg-neutral p-4 rounded-md shadow-lg border border-neutral overflow-hidden pb-60 h-[684px]" :class="this.apartment.user_id !== this.userId ? 'col-span-1' : 'col-span-4'">
 
             <!-- Informazioni -->
             <div class="mb-6">
@@ -164,7 +164,7 @@
             </div>
 
             <!-- Servizi -->
-            <div class="border-t-2 border-secondary pt-4">
+            <div class="border-t-2 border-secondary pt-4 h-full overflow-auto">
                 <h4 class="font-bold text-lg">Servizi</h4>
 
                 <!-- Verifica se ci sono servizi -->
