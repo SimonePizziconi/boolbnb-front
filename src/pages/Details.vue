@@ -172,8 +172,8 @@
 
             </div>
 
-            <div v-if="this.apartment.user_id !== this.userId" :apartmentSlug="this.slug" class="rounded-md mt-10 mb-10 text-center sticky"> 
-                <ContactForm></ContactForm>
+            <div v-if="this.apartment.user_id !== this.userId" class="rounded-md mt-10 mb-10 text-center sticky"> 
+                <ContactForm :apartmentSlug="this.slug"></ContactForm>
             </div>
 
         </div>
