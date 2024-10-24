@@ -28,7 +28,7 @@
 
         methods:{
             getUser(){
-            axios.get(store.apiUrl + 'user')
+            axios.get(store.apiUrl + 'user', { withCredentials: true })
                 .then(res => {
                 console.log(res.data);
                 
@@ -64,7 +64,6 @@
                                 message:[],
                             }
                         }
-                        //console.log(this.errors);
                         
                     })
             }
