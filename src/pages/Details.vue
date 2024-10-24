@@ -127,7 +127,9 @@
 
 <template>
 
-<div class="loader-container" v-if="this.loading">
+<div class="container mx-auto">
+
+    <div class="loader-container" v-if="this.loading">
     <Loader></Loader>
 </div>
 
@@ -148,7 +150,7 @@
     </div>
 
     <!-- Informazioni e servizi dell'appartamento -->
-    <div class="grid gap-6 mt-10 lg:grid-cols-3"> 
+    <div class="grid gap-6 mt-10 lg:grid-cols-3 sm:grid-cols-1 sm:gap-x-0"> 
         
         <!-- Info appartamento e servizi -->
         <div class=" bg-neutral p-4 rounded-md shadow-lg border border-neutral" :class="this.apartment.user_id !== this.userId ? 'col-span-2' : 'col-span-4'">
@@ -166,7 +168,7 @@
                 <h4 class="font-bold text-lg">Servizi</h4>
 
                 <!-- Verifica se ci sono servizi -->
-                <div class="flex flex-wrap mt-2" v-if="apartment.services && apartment.services.length > 0">
+                <div class="flex flex-col flex-wrap mt-2" v-if="apartment.services && apartment.services.length > 0">
                     <div class="ms-2 mb-2 flex items-center" v-for="service in apartment.services" :key="service.id">
                         <i :class="`fas fa-${getServiceIcon(service.name)}`" class="text-lg mr-2"></i> 
                         <span class="text-lg">{{ service.name }}</span> 
@@ -201,6 +203,10 @@
     </div>
 
 </div>
+
+</div>
+
+
 </template>
 
 

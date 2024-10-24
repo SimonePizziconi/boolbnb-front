@@ -67,44 +67,46 @@
 </script>
 
 <template>
-  <div class="loader-container" v-if="this.loading">
-    <Loader></Loader>
-  </div>
+  <div class="container mx-auto">
+
+    <div class="loader-container" v-if="this.loading">
+      <Loader></Loader>
+    </div>
   
-  <div v-else>
+    <div v-else>
 
-    <div class="mt-20 mb-20 mx-5 lg:mx-20 pt-16">
-      <!-- Sezione Appartamenti in evidenza -->
-      <h1 class="text-primary text-xl lg:text-2xl font-bold">Appartamenti in evidenza</h1>
-      <swiper 
-        :autoplay="{delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true}" 
-        :modules="modules" 
-        :slides-per-view="4" 
-        space-between="20" 
-        loop="true"  
-        :breakpoints="{
-          320: { slidesPerView: 1 },
-          640: { slidesPerView: 1 },
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 4 },
-          1280: { slidesPerView: 4 }
-        }" 
-        class="my-swiper"
-      >
-        <swiper-slide v-for="apartment in sponsorshipApartments" :key="apartment.id">
-          <Card class="border-2 border-secondary rounded-md" :apartment="apartment" />
-        </swiper-slide>
-      </swiper>
+      <div class="mt-20 mb-20 mx-5 lg:mx-20 pt-16">
+        <!-- Sezione Appartamenti in evidenza -->
+        <h1 class="text-primary text-xl lg:text-2xl font-bold">Appartamenti in evidenza</h1>
+        <swiper 
+          :autoplay="{delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true}" 
+          :modules="modules" 
+          :slides-per-view="4" 
+          space-between="20" 
+          loop="true"  
+          :breakpoints="{
+            320: { slidesPerView: 1 },
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 4 },
+            1280: { slidesPerView: 4 }
+          }" 
+          class="my-swiper"
+        >
+          <swiper-slide v-for="apartment in sponsorshipApartments" :key="apartment.id">
+            <Card class="border-2 border-secondary rounded-md" :apartment="apartment" />
+          </swiper-slide>
+        </swiper>
 
-      <!-- Sezione Appartamenti senza sponsorizzazioni -->
-      <h1 class="text-primary text-xl lg:text-2xl font-bold mt-10">I nostri appartamenti</h1>
-      <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 w-full pb-10">
-        <Card 
-          v-for="apartment in visibleNonSponsorshipApartments" 
-          :key="apartment.id" 
-          :apartment="apartment" 
-        />
-      </div>
+        <!-- Sezione Appartamenti senza sponsorizzazioni -->
+        <h1 class="text-primary text-xl lg:text-2xl font-bold mt-10">I nostri appartamenti</h1>
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 w-full pb-10">
+          <Card 
+            v-for="apartment in visibleNonSponsorshipApartments" 
+            :key="apartment.id" 
+            :apartment="apartment" 
+          />
+        </div>
             
       <!-- Bottone per caricare gli altri appartamenti -->
       <div class="w-full flex justify-center mt-4">
@@ -128,6 +130,9 @@
       </div>
     </div>
   </div>
+
+  </div>
+
 </template>
 
 

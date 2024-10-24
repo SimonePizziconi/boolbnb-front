@@ -106,7 +106,7 @@ export default {
 </script>
 
 <template>
-  <div class="mt-20 mb-20 mx-5 lg:mx-20 pt-16">
+  <div class="mt-20 mb-20 pt-16 container mx-auto">
 
       <div class="filters lg:w-fit mx-auto p-8 bg-neutral border-2 border-gray-100 shadow-lg rounded-3xl">
         <form @submit.prevent="fetchSearchResults" class="grid md:grid-cols-5 sm:grid-cols-1 gap-4">
