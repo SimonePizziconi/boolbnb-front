@@ -19,7 +19,8 @@
                 store,
                 slug: '',
                 apartment: {},
-                loading:true
+                loading:true,
+                userId: 0
             }
         },
         methods: {
@@ -34,6 +35,16 @@
                     });
                 })
                 //console.log(this.slug);
+            },
+            getUser(){
+                axios.get(store.apiUrl + 'user', { withCredentials: true })
+                    .then(res => {
+                        this.userId = res.data.user.id;
+                        console.log(this.userId);
+                    })
+                    .catch(error => {
+                        console.log(error.message);
+                    })
             },
             // Funzione per mostrare la mappa
             showMap() {
@@ -109,6 +120,7 @@
         mounted(){
             this.slug = this.$route.params.slug
             this.getApartment();
+            this.getUser();
         }
     }
 </script>
@@ -139,7 +151,7 @@
     <div class="grid gap-6 mt-10 lg:grid-cols-3"> 
         
         <!-- Info appartamento e servizi -->
-        <div class="lg:col-span-2 bg-neutral p-4 rounded-md shadow-lg border border-neutral">
+        <div class=" bg-neutral p-4 rounded-md shadow-lg border border-neutral" :class="this.apartment.user_id !== this.userId ? 'col-span-2' : 'col-span-4'">
 
             <!-- Informazioni -->
             <div class="mb-6">
@@ -169,7 +181,7 @@
         </div>
 
         <!-- Contatto -->
-        <div class="rounded-md bg-neutral shadow-lg border border-neutral p-4 lg:p-6">
+        <div v-if="this.apartment.user_id !== this.userId" class="rounded-md bg-neutral shadow-lg border border-neutral p-4 lg:p-6">
             <ContactForm :apartmentSlug="this.slug"></ContactForm>
         </div>
 

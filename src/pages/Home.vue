@@ -92,12 +92,12 @@
         class="my-swiper"
       >
         <swiper-slide v-for="apartment in sponsorshipApartments" :key="apartment.id">
-          <Card :apartment="apartment" />
+          <Card class="border-2 border-secondary rounded-md" :apartment="apartment" />
         </swiper-slide>
       </swiper>
 
       <!-- Sezione Appartamenti senza sponsorizzazioni -->
-      <h1 class="text-primary text-xl lg:text-2xl font-bold mt-10">Appartamenti senza Sponsorizzazioni</h1>
+      <h1 class="text-primary text-xl lg:text-2xl font-bold mt-10">I nostri appartamenti</h1>
       <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 w-full pb-10">
         <Card 
           v-for="apartment in visibleNonSponsorshipApartments" 
@@ -111,7 +111,7 @@
         <svg 
           v-if="visibleNonSponsorshipApartments.length < nonSponsorshipApartments.length" 
           @click="loadMoreNonSponsorship" 
-          class="animate-bounce h-10 bg-accent rounded-full text-white cursor-pointer w-20"
+          class="animate-bounce h-10 bg-accent rounded-full text-white cursor-pointer w-28 pe-2 ps-2 font-bold"
         >
           <text 
             x="50%" 
