@@ -8,7 +8,5 @@ export const store = reactive({
     radius: 20,
     rooms: 1,
     beds: 1,
-    services: [],
-    selectedServices: []
-    
+    services: [],    
 });
