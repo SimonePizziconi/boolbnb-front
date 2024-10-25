@@ -21,7 +21,7 @@ export default {
       rooms: store.rooms,
       beds: store.beds,
       services: store.services,   
-      selectedServices: store.selectedServices, // Servizi selezionati dall'utente
+      selectedServices: [], // Servizi selezionati dall'utente
       isModalOpen: false,   // Stato del modal (aperto/chiuso)
       isLoading: false,
       count: 0
@@ -34,23 +34,22 @@ export default {
   },
   methods: {
     updateQueryParams() {
-        // Aggiorna l'URL con i parametri correnti
-        this.$router.replace({
-            name: "search",
-            query: {
-                q: store.searchQuery,
-                lat: store.lat,
-                lng: store.lng,
-                radius: store.radius,
-                rooms: store.rooms,
-                beds: store.beds,
-                services: store.selectedServices
-            }
-        });
+      // Aggiorna l'URL con i parametri correnti
+      this.$router.replace({
+          name: "search",
+          query: {
+              q: store.searchQuery,
+              lat: store.lat,
+              lng: store.lng,
+              radius: store.radius,
+              rooms: store.rooms,
+              beds: store.beds,
+              services: this.selectedServices
+        }
+      });
     },
     fetchSearchResults() {  
-      this.isLoading = true;  
-      const selectedServices = store.selectedServices.map(service => service.name);  
+      this.isLoading = true; 
       // Effettua la chiamata API con il parametro di ricerca
       axios.get(store.apiUrl + 'apartments/search', {
           params: {
@@ -59,7 +58,7 @@ export default {
             radius: store.radius || 20,
             rooms: store.rooms || 1,
             beds: store.beds || 1,
-            services: selectedServices || []
+            services: this.selectedServices || []
           },
         })
         .then((res) => {
@@ -67,6 +66,8 @@ export default {
           this.apartments = res.data.apartments; 
           this.count = res.data.count;
           this.isLoading = false;
+          console.log('servizi: ' + this.selectedServices);
+          
         })
         .catch((error) => {
           console.log(error.message);
@@ -144,7 +145,7 @@ export default {
             <!-- Bottone menù servizi -->
             <div class="text-center">
               <button class="btn bg-accent text-neutral font-bold w-fit h-fit p-2 ps-6 pe-6 rounded-lg mt-5 hover:bg-lime-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent transition duration-300" @click="toggleModal">
-                {{ store.selectedServices.length > 0 ? 'Servizi (' + store.selectedServices.length + ')' : 'Servizi' }}
+                {{ this.selectedServices.length > 0 ? 'Servizi (' + this.selectedServices.length + ')' : 'Servizi' }}
               </button>
             </div>
 
@@ -164,7 +165,7 @@ export default {
             
             <!-- Lista servizi -->
             <div v-for="service in store.services" :key="service.id" class="flex items-center m-2">
-              <input type="checkbox" class="filter-checkbox rounded-sm checked:bg-accent outline-accent focus:outline-accent" :id="service.id" v-model="store.selectedServices" :value="service.name" @change="fetchSearchResults">
+              <input type="checkbox" class="filter-checkbox rounded-sm checked:bg-accent outline-accent focus:outline-accent" :id="service.id" v-model="this.selectedServices" :value="service.id" @change="fetchSearchResults">
               <label :for="service.id" class="ml-2">{{ service.name }}</label>
             </div>
 
