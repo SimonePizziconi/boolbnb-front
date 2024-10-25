@@ -130,79 +130,78 @@
 <div class="container mx-auto">
 
     <div class="loader-container" v-if="this.loading">
-    <Loader></Loader>
-</div>
-
-<div class="mt-20 mb-20 px-5 lg:px-20 pt-16" v-else>
-
-    <!-- Titolo e indirizzo -->
-    <div>
-        <h1 class="mt-2 text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">{{ apartment.title }}</h1>
-        <span class="block mt-2 text-lg text-gray-600">
-            <i class="fa-solid fa-location-dot me-2"></i>{{ apartment.address }}
-        </span>
+        <Loader></Loader>
     </div>
 
-    <!-- Immagine principale -->
-    <div class="mt-4 pic-container rounded-md overflow-hidden">
-        <img class="h-full w-full object-cover object-center transition-transform duration-1000 hover:scale-105" 
-            :src="apartment.image_path" :alt="apartment.title">
-    </div>
+    <div class="mt-20 mb-20 px-5 lg:px-20 pt-16" v-else>
 
-    <!-- Informazioni e servizi dell'appartamento -->
-    <div class="grid mt-10 lg:grid-cols-2 grid-cols-1 gap-y-6 gap-x-0 md:gap-6"> 
-        
-        <!-- Info appartamento e servizi -->
-        <div class=" bg-neutral p-4 rounded-md shadow-lg border border-neutral overflow-hidden pb-60 h-[684px]" :class="this.apartment.user_id !== this.userId ? 'col-span-1' : 'col-span-4'">
+        <!-- Titolo e indirizzo -->
+        <div>
+            <h1 class="mt-2 text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">{{ apartment.title }}</h1>
+            <span class="block mt-2 text-lg text-gray-600">
+                <i class="fa-solid fa-location-dot me-2"></i>{{ apartment.address }}
+            </span>
+        </div>
 
-            <!-- Informazioni -->
-            <div class="mb-6">
-                <h4 class="font-bold text-lg">Cosa troverai</h4>
-                <span class="block text-lg mt-2"><i class="fa-solid fa-house-chimney"></i> Numero di stanze - {{ apartment.rooms }}</span>
-                <span class="block text-lg mt-2"><i class="fa-solid fa-bed"></i> Numero di letti - {{ apartment.beds }}</span>
-                <span class="block text-lg mt-2"><i class="fa-solid fa-toilet-paper"></i> Numero di bagni - {{ apartment.bathrooms }}</span>
-            </div>
+        <!-- Immagine principale -->
+        <div class="mt-4 pic-container rounded-md overflow-hidden">
+            <img class="h-full w-full object-cover object-center transition-transform duration-1000 hover:scale-105" 
+                :src="apartment.image_path" :alt="apartment.title">
+        </div>
 
-            <!-- Servizi -->
-            <div class="border-t-2 border-secondary pt-4 h-full overflow-auto">
-                <h4 class="font-bold text-lg">Servizi</h4>
+        <!-- Informazioni e servizi dell'appartamento -->
+        <div class="flex flex-col lg:flex-row mt-10 gap-6"> 
 
-                <!-- Verifica se ci sono servizi -->
-                <div class="flex flex-col flex-wrap mt-2" v-if="apartment.services && apartment.services.length > 0">
-                    <div class="ms-2 mb-2 flex items-center" v-for="service in apartment.services" :key="service.id">
-                        <i :class="`fas fa-${getServiceIcon(service.name)}`" class="text-lg mr-2"></i> 
-                        <span class="text-lg">{{ service.name }}</span> 
+            <!-- Info appartamento e servizi -->
+            <div class="bg-neutral p-4 rounded-md shadow-lg border border-neutral w-full lg:w-3/5 h-fit">
+                <!-- Informazioni -->
+                <div class="mb-6">
+                    <h4 class="font-bold text-lg">Cosa troverai</h4>
+                    <span class="block text-lg mt-2"><i class="fa-solid fa-house-chimney"></i> Numero di stanze - {{ apartment.rooms }}</span>
+                    <span class="block text-lg mt-2"><i class="fa-solid fa-bed"></i> Numero di letti - {{ apartment.beds }}</span>
+                    <span class="block text-lg mt-2"><i class="fa-solid fa-toilet-paper"></i> Numero di bagni - {{ apartment.bathrooms }}</span>
+                </div>
+
+                <!-- Servizi -->
+                <div class="border-t-2 border-secondary pt-4">
+                    <h4 class="font-bold text-lg">Servizi</h4>
+
+                    <!-- Verifica se ci sono servizi -->
+                    <div v-if="apartment.services && apartment.services.length > 0">
+                        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2 mt-2">
+                            <div v-for="service in apartment.services" :key="service.id" class="flex items-center">
+                                <i :class="`fas fa-${getServiceIcon(service.name)}`" class="text-lg mr-2"></i> 
+                                <span class="text-lg">{{ service.name }}</span> 
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Nessun servizio disponibile -->
+                    <div v-else>
+                        <span class="ms-2 text-lg">Nessun servizio disponibile per questo appartamento.</span>
                     </div>
                 </div>
-                <!-- Nessun servizio disponibile -->
-                <div v-else>
-                    <span class="ms-2 text-lg">Nessun servizio disponibile per questo appartamento.</span>
-                </div>
             </div>
 
+            <!-- Contatto -->
+            <div v-if="this.apartment.user_id !== this.userId" class="rounded-md bg-neutral shadow-lg border border-neutral p-4 lg:p-6 lg:w-2/5 sm:flex-1">
+                <ContactForm :apartmentSlug="this.slug"></ContactForm>
+            </div>
         </div>
 
-        <!-- Contatto -->
-        <div v-if="this.apartment.user_id !== this.userId" class="rounded-md bg-neutral shadow-lg border border-neutral p-4 lg:p-6">
-            <ContactForm :apartmentSlug="this.slug"></ContactForm>
+
+    
+
+
+        <!-- Mappa TomTom -->
+        <div class="border-t-2 border-secondary mt-10">
+            <h4 class="mt-5 text-2xl">Dove sarai</h4>
+            <div id="map" class="w-full h-64 sm:h-80 lg:h-96 rounded shadow mt-3"></div>
+            <span class="block mt-2 text-lg">
+                <i class="fa-solid fa-location-dot me-2"></i>{{ apartment.address }}
+            </span>
         </div>
 
-        <!-- <div class="rounded-md p-4 lg:p-6 text-center"> 
-            <ContactForm :apartmentSlug="this.slug"></ContactForm>
-        </div> -->
-
     </div>
-
-    <!-- Mappa TomTom -->
-    <div class="border-t-2 border-secondary mt-10">
-        <h4 class="mt-5 text-2xl">Dove sarai</h4>
-        <div id="map" class="w-full h-64 sm:h-80 lg:h-96 rounded shadow mt-3"></div>
-        <span class="block mt-2 text-lg">
-            <i class="fa-solid fa-location-dot me-2"></i>{{ apartment.address }}
-        </span>
-    </div>
-
-</div>
 
 </div>
 
