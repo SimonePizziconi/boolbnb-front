@@ -16,7 +16,7 @@
               Distanza: {{ apartment.distance.toFixed(2) }} km
             </p>
             <span class="lg:text-sm sm:text-md pb-2 pt-2 mt-4 border-b-2 border-t-2 border-accent me-2 truncate"><i class="fa-solid fa-location-dot me-2 text-accent"></i>{{ apartment.address }}</span>
-            <span class="lg:text-sm sm:text-md pb-2 pt-2 mt-2 mb-2 block truncate"><i class="fa-solid fa-house-chimney text-secondary"></i> Stanze - {{ apartment.rooms }}  <i class="fa-solid fa-pen-ruler ms-3 text-secondary"></i> Metri quadrati - {{ apartment.square_meters }}</span>
+            <span class="lg:text-sm sm:text-md pb-2 pt-2 mt-2 mb-2 block truncate"><i class="fa-solid fa-house-chimney text-secondary"></i> Stanze - {{ apartment.rooms }}  <i class="fa-solid fa-pen-ruler ms-3 text-secondary"></i> Posti letto - {{ apartment.beds }}</span>
         </div>
     </router-link>
 </template>
