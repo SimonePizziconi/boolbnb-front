@@ -65,7 +65,7 @@ export default {
                 v-model="store.searchQuery"
                 placeholder="Cerca una destinazione..."
                 @input="searchLocation"
-                class="w-full p-2 border border-accent rounded-lg text-black focus:border-secondary  focus:outline-none"
+                class="w-full p-2 border border-accent rounded-lg text-black focus:border-primary focus:ring-primary focus:outline-none"
             />
             <button
                 type="submit"
