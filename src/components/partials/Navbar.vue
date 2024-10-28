@@ -75,7 +75,7 @@ export default {
         <div class="relative inline-block text-left">
           <div>
             <button type="button" id="menu-button" aria-expanded="true" aria-haspopup="true" @click="toggleDropdown">
-              <div class="flex flex-col justify-center items-center text-neutral hover:text-accent">
+              <div class="flex flex-col justify-center items-center text-neutral hover:text-accent pl-1">
                 <div class="p-5 aspect-square bg-accent hover:bg-neutral rounded-full relative">
                   <i class="fa-solid fa-user absolute top-1/2 left-1/2" style="transform:translate(-50%, -50%)"></i>
                 </div>
