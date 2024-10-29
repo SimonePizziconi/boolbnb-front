@@ -52,7 +52,10 @@ export default {
   <nav class="text-white fixed w-full z-10 top-0 left-0 flex bg-primary p-2">
     <div class="container mx-auto px-4 py-2 flex justify-between items-center">
       <!-- Logo -->
-      <div class="w-14">
+      <div class="w-14 mr-4 md:hidden">
+        <router-link to="/"><img src="../../../public/img/small-logo.png" alt="Logo"></router-link>
+      </div>
+      <div class="w-14 hidden md:block">
         <router-link to="/"><img src="../../../public/img/logo-bool-bnb.png" alt="Logo"></router-link>
       </div>
 
@@ -80,7 +83,7 @@ export default {
 
       <!-- User -->
       <div v-else>
-        <div class="relative inline-block text-left">
+        <div class="relative inline-block text-left ml-4">
           <div>
             <button type="button" id="menu-button" aria-expanded="true" aria-haspopup="true" @click="toggleDropdown">
               <div class="flex flex-col justify-center items-center text-neutral hover:text-accent pl-1">
