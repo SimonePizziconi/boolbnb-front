@@ -21,7 +21,7 @@ export default {
         axios.get(store.apiUrl + 'user', { withCredentials: true })
             .then(res => {
               this.user = res.data.user;
-              console.log(this.user);
+              // console.log(this.user);
             })
             .catch(error => {
                 console.log(error.message);
