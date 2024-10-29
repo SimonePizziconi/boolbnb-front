@@ -24,23 +24,42 @@
             }
         },
         methods: {
-            getApartment(){
-                axios.get(store.apiUrl + 'apartment/' + this.slug)
-                .then(res => {
-                    this.apartment = res.data.apartment;
-                    console.log(this.apartment);
-                    this.loading = false;
-                    this.$nextTick(() => {  // Assicuriamoci che il DOM sia pronto
-                        this.showMap();
+            // Metodo per registrare la visualizzazione
+            recordView() {  
+                const apartmentId = this.apartment.id;
+                
+                // Invia il log della visualizzazione al server
+                axios.post(store.apiUrl + 'statistics', { apartment_id: this.apartment.id })
+                    .catch(error => {
+                        console.error("Errore nella registrazione della visualizzazione:", error);
+                        // Opzionalmente: puoi comunque salvare la data nel local storage anche se la richiesta fallisce
+                        localStorage.setItem(`viewed_${this.apartment.id}`, today);
                     });
+            },
+                
+            getApartment(){
+                if (this.apartment.id) {
+                    localStorage.removeItem(`viewed_${this.apartment.id}`);
+                }
+                
+                axios.get(store.apiUrl + 'apartment/' + this.slug)
+                    .then(res => {
+                        this.apartment = res.data.apartment;
+                        // console.log(this.apartment);
+                        this.loading = false;
+                        this.$nextTick(() => {  // Assicuriamoci che il DOM sia pronto
+                            this.showMap();
+                        });
+                    this.recordView();
                 })
                 //console.log(this.slug);
             },
+
             getUser(){
                 axios.get(store.apiUrl + 'user', { withCredentials: true })
-                    .then(res => {
+                .then(res => {
                         this.userId = res.data.user.id;
-                        console.log(this.userId);
+                        // console.log(this.userId);
                     })
                     .catch(error => {
                         console.log(error.message);
@@ -49,7 +68,7 @@
             // Funzione per mostrare la mappa
             showMap() {
                 var apiKey = 'd0Xq2xNT1UVJmJOO7pFoBBiHcFLGGy2Q';
-
+                
                 if (this.apartment.latitude && this.apartment.longitude) {
                     // Crea la mappa
                     var map = tt.map({
@@ -64,9 +83,9 @@
                         .setLngLat([this.apartment.longitude, this.apartment.latitude])
                         .addTo(map);
 
-                    console.log('Latitudine:', this.apartment.latitude, 'Longitudine:', this.apartment.longitude);
+                    // console.log('Latitudine:', this.apartment.latitude, 'Longitudine:', this.apartment.longitude);
                 } else {
-                    console.log('Coordinate mancanti per l\'appartamento con ID: ' + this.apartment.id);
+                    // console.log('Coordinate mancanti per l\'appartamento con ID: ' + this.apartment.id);
                 }
             },
             getServiceIcon(serviceName) {

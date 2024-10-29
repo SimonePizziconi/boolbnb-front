@@ -39,11 +39,11 @@
                         this.user = res.data.user;
                         this.email = res.data.user.email; 
                     }
-                console.log(this.email);
+                // console.log(this.email);
                 
                 })
                 .catch(error => {
-                console.log(error.message);
+                    console.log(error.message);
                 })
             },
 
@@ -56,12 +56,12 @@
                     email: this.email,
                     message: this.message
                 }
-                console.log(data);
+                // console.log(data);
                 
                 axios.post(store.apiUrl + 'message/' + this.apartmentSlug, data)
                     .then(res => {
                         this.sending = false;
-                        console.log(res.data);
+                        // console.log(res.data);
                         if(!res.data.success){
                             this.errors = res.data.errors;
                         }else{
@@ -80,7 +80,7 @@
 
         mounted(){
             this.getUser()
-            console.log(this.apartmentSlug);
+            // console.log(this.apartmentSlug);
             
         }
     }
