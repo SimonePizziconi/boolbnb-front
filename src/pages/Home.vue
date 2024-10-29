@@ -100,7 +100,7 @@
 
         <!-- Sezione Appartamenti senza sponsorizzazioni -->
         <h1 class="text-primary text-xl lg:text-2xl font-bold mt-10">I nostri appartamenti</h1>
-        <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 w-full pb-10">
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 w-full pb-10">
           <Card 
             v-for="apartment in visibleNonSponsorshipApartments" 
             :key="apartment.id" 

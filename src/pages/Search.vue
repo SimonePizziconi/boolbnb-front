@@ -107,10 +107,10 @@ export default {
 </script>
 
 <template>
-  <div class="mt-20 mb-20 pt-16 container mx-auto">
+  <div class="mt-20 mb-20 pt-16 container mx-auto p-8">
 
-      <div class="filters lg:w-fit mx-auto p-8 bg-neutral border-2 border-gray-100 shadow-lg rounded-3xl">
-        <form @submit.prevent="fetchSearchResults" class="grid md:grid-cols-5 sm:grid-cols-1 gap-4">
+      <div class="filters lg:w-fit w-full mx-auto p-8 bg-neutral border-2 border-gray-100 shadow-lg rounded-3xl">
+        <form @submit.prevent="fetchSearchResults" class="grid md:grid-cols-5 grid-cols-1 gap-4">
 
             <!-- Selezione raggio -->
             <div>
@@ -158,10 +158,10 @@ export default {
 
       <!-- Modal per la selezione dei servizi -->
       <div v-if="isModalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-primary bg-opacity-50">
-        <div class="bg-neutral p-8 rounded-lg w-5/6">
+        <div class="bg-neutral p-8 rounded-lg w-5/6 xl:w-fit">
           <h2 class="text-xl mb-4 font-bold">Seleziona i servizi</h2>
 
-          <div class="flex flex-col lg:flex-wrap h-fit max-h-96 lg:overflow-hidden sm:overflow-auto">
+          <div class="flex flex-col lg:flex-wrap h-fit max-h-96 lg:overflow-hidden overflow-auto">
             
             <!-- Lista servizi -->
             <div v-for="service in store.services" :key="service.id" class="flex items-center m-2">
@@ -182,7 +182,7 @@ export default {
 
       <h3 class="mt-6">Appartamenti Disponibili: <strong>{{ this.count }}</strong></h3>
 
-      <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 pb-20 gap-4">
+      <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 pb-20 gap-4">
         <Card 
           v-for="apartment in apartments" 
           :key="apartment.id" 
