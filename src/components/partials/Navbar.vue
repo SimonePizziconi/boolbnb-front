@@ -138,7 +138,7 @@ export default {
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
-                <SearchBar @onSearch="toggleSearchModal" />
+                <SearchBar @searchCompleted="toggleSearchModal" />
               </div>
             </div>
         </transition>
@@ -147,11 +147,15 @@ export default {
       </div>
 
     </div>
-    <div v-if="menuOpen" class="md:hidden flex flex-col m-1">
-      <!-- <RouterLink to="/" class="block hover:bg-gray-700 px-3 py-2">Home</RouterLink> -->
-      <a href="http://127.0.0.1:8000/login">Login</a>
-      <a href="http://127.0.0.1:8000/register">Registrati</a>
-      <!-- <RouterLink to="/contacts" class="block hover:bg-gray-700 px-3 py-2">Contacts</RouterLink> -->
+    <div v-if="menuOpen" class="absolute right-0 -bottom-16 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-300 rounded-md bg-neutral shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+      <div class="py-1" role="none">
+        <a href="http://localhost:8000/login" class="block px-4 py-2 text-sm text-primary hover:bg-accent hover:text-neutral"  role="menuitem" tabindex="-1" id="menu-item-6">
+          <span>Accedi</span>
+        </a>
+        <a href="http://localhost:8000/register" class="block px-4 py-2 text-sm text-primary hover:bg-accent hover:text-neutral"  role="menuitem" tabindex="-1" id="menu-item-6">
+          <span>Registrati</span>
+        </a>
+      </div>
     </div>
   </nav>
 </template>
