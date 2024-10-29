@@ -14,6 +14,7 @@ export default {
       store,
       user: {},
       isDropdownOpen: false,
+      isModalOpen: false,
     }
   },
   methods: {
@@ -29,6 +30,9 @@ export default {
     },
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen;
+    },
+    toggleSearchModal() {
+      this.isModalOpen = !this.isModalOpen;
     },
   },
   setup() {
@@ -53,7 +57,11 @@ export default {
       </div>
 
       <!-- SearchBar -->
-      <SearchBar />
+      <SearchBar class="hidden sm:block"/>
+
+      <button @click="toggleSearchModal" class="sm:hidden bg-accent text-white px-4 py-2 rounded-lg">
+        Dove vuoi andare?
+      </button>
 
       <!-- Link -->
       <div v-if="!this.user">
@@ -121,6 +129,18 @@ export default {
               </a>
             </div>
           </div>
+        </transition>
+        <transition name="fade">
+            <div v-if="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-20">
+              <div class="bg-neutral w-full max-w-md pt-8 pb-8 pl-2 pr-2 mr-2 ml-2 rounded-lg relative">
+                <button @click="toggleSearchModal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+                <SearchBar @onSearch="toggleSearchModal" />
+              </div>
+            </div>
         </transition>
         </div>
 

@@ -85,7 +85,7 @@
           space-between="20" 
           loop="true"  
           :breakpoints="{
-            320: { slidesPerView: 1 },
+            250: { slidesPerView: 1 },
             640: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 4 },
