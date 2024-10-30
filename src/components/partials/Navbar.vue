@@ -126,11 +126,6 @@ export default {
                 <span>Messaggi</span>
               </a>
             </div>
-            <div class="py-1" role="none">
-              <a href="#" class="block px-4 py-2 text-sm text-primary hover:bg-accent hover:text-neutral"  role="menuitem" tabindex="-1" id="menu-item-6">
-                <span>Logout</span>
-              </a>
-            </div>
           </div>
         </transition>
         <transition name="fade">
