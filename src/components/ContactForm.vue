@@ -103,7 +103,7 @@
                     <div>
                         <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">Nome*</label>
                         <div class="mt-2.5">
-                            <input required minlength="3" v-model="first_name" type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6">
+                            <input required minlength="3" v-model="first_name" type="text" name="first-name" id="first-name" autocomplete="off" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6">
                     </div>
                     <p class="text-red-600 text-xs mt-1">{{ errors.first_name?.toString() }}</p>
                 </div>
@@ -112,7 +112,7 @@
                 <div>
                     <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Cognome*</label>
                     <div class="mt-2.5">
-                    <input required minlength="3" v-model="last_name" type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6">
+                    <input required minlength="3" v-model="last_name" type="text" name="last-name" id="last-name" autocomplete="off" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6">
                     </div>
                     <p class="text-red-600 text-xs mt-1">{{ errors.last_name?.toString() }}</p>
                 </div>
@@ -121,7 +121,7 @@
                 <div class="sm:col-span-2">
                     <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email*</label>
                     <div class="mt-2.5">
-                        <input :disabled="this.user" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" v-model="email" type="email" name="email" id="email" autocomplete="email" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6" :class="this.user ? 'logged' : ''">
+                        <input :disabled="this.user" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" v-model="email" type="email" name="email" id="email" autocomplete="off" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6" :class="this.user ? 'logged' : ''">
                     </div>
                     <p class="text-red-600 text-xs mt-1">{{ errors.email?.toString() }}</p>
                 </div>
